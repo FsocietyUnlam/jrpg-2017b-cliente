@@ -12,14 +12,13 @@
 
 ### Integrantes del equipo
 
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
-* Completar ([xxxx](https://github.com/xxxx))
+* Chahua Ascoy, Anthoanne Milagros ([anthoanne](https://travis-ci.org/profile/anthoanne))
+* López, Federico ([xxxx](https://github.com/xxxx))
+* Magallanes, Lucas Ariel ([lucasMagallanes](https://travis-ci.org/profile/lucasMagallanes))
+* Manso, Maximiliano ([MaxiManso](https://travis-ci.org/profile/MaxiManso))
+* Oria, Joaquín Ariel ([OriaJoaquin](https://travis-ci.org/profile/OriaJoaquin))
+* Ramos, Maximiliano ([MaxiARG](https://travis-ci.org/profile/MaxiARG))
+* Rojas, Hector ([HectorRojasStoll](https://travis-ci.org/profile/HectorRojasStoll))
 
 ## Sobre la tecnología
 
