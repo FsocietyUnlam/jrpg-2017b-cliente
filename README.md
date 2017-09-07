@@ -13,7 +13,7 @@
 ### Integrantes del equipo
 
 * Chahua Ascoy, Anthoanne Milagros ([anthoanne](https://travis-ci.org/profile/anthoanne))
-* López, Federico ([xxxx](https://github.com/xxxx))
+* López, Federico ([mfedelopez](https://travis-ci.org/profile/mfedelopez))
 * Magallanes, Lucas Ariel ([lucasMagallanes](https://travis-ci.org/profile/lucasMagallanes))
 * Manso, Maximiliano ([MaxiManso](https://travis-ci.org/profile/MaxiManso))
 * Oria, Joaquín Ariel ([OriaJoaquin](https://travis-ci.org/profile/OriaJoaquin))
