@@ -27,7 +27,7 @@ import java.awt.event.WindowEvent;
 public class MenuAsignarSkills extends JFrame {
 
 	private JPanel contentPane;
-	private int puntosAsignarInicial = 10;
+	private int puntosAsignarInicial = 0;
 	private int puntosFuerzaInicial = 0;
 	private int puntosDestrezaInicial = 0;
 	private int puntosInteligenciaInicial = 0;
@@ -41,7 +41,7 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = 3;
+		puntosAsignarInicial = 3;//cliente.getPaquetePersonaje().ge;
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();

@@ -25,6 +25,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	private int puntosGanados;
 	private ArrayList<Item> items = new ArrayList<Item>();
 	
 	public PaquetePersonaje() throws IOException {
@@ -61,6 +62,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	public void setExperiencia(int experiencia) {
 		this.experiencia = experiencia;
+	}
+	
+	public int getPuntosGanados() {
+		return puntosGanados;
+	}
+
+	public void setPuntosGanados(int puntosGanados) {
+		this.puntosGanados = puntosGanados;
 	}
 
 	public int getId() {
