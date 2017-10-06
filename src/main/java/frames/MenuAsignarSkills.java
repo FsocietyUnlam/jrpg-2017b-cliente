@@ -28,10 +28,14 @@ public class MenuAsignarSkills extends JFrame {
 
 	private JPanel contentPane;
 	private int puntosAsignarInicial = 0;
+	private int puntosFuerzaSinPuntosAsignados = 0;
+	private int puntosDestrezaSinPuntosAsignados = 0;
+	private int puntosInteligenciaSinPuntosAsignados = 0;
 	private int puntosFuerzaInicial = 0;
 	private int puntosDestrezaInicial = 0;
 	private int puntosInteligenciaInicial = 0;
-	private int puntosAsignar = puntosAsignarInicial;
+	private int puntosAsignarTope;
+	private int puntosAsignar;// = puntosAsignarInicial;
 	private int puntosFuerza = puntosFuerzaInicial;
 	private int puntosDestreza = puntosDestrezaInicial;
 	private int puntosInteligencia = puntosInteligenciaInicial;
@@ -41,7 +45,11 @@ public class MenuAsignarSkills extends JFrame {
 	 * Create the frame.
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
-		puntosAsignarInicial = 3;//cliente.getPaquetePersonaje().ge;
+		puntosAsignarTope = (cliente.getPaquetePersonaje().getNivel() -1) * 3;
+		cliente.getPaquetePersonaje().getCasta();//puntosAsignarInicial = 3;//cliente.getPaquetePersonaje().ge;
+		
+		puntosFuerzaSinPuntosAsignados = cliente.getPaquetePersonaje().getFuerza() / cliente.getPaquetePersonaje().
+		
 		puntosFuerzaInicial = cliente.getPaquetePersonaje().getFuerza();
 		puntosDestrezaInicial = cliente.getPaquetePersonaje().getDestreza();
 		puntosInteligenciaInicial = cliente.getPaquetePersonaje().getInteligencia();
@@ -193,7 +201,9 @@ public class MenuAsignarSkills extends JFrame {
 							buttonMore2.setEnabled(true);
 					}
 					puntosAsignar++;
+					
 					if(puntosAsignar == puntosAsignarInicial){
+						//Entra si no hubo cambios.
 						buttonConfirm.setEnabled(false);
 					}
 					labelPuntos.setText(String.valueOf(puntosAsignar));

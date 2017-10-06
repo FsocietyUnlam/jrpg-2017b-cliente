@@ -28,6 +28,28 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int puntosGanados;
 	private ArrayList<Item> items = new ArrayList<Item>();
 	
+	
+	/** Cantidad a multiplicar.
+	 * Para obtener los puntos de ataque de personaje.
+	 */
+	private static final double MULTIPLICADORFZA = 1.5;
+	/**
+	 * Cantidad a multiplicar para obtener los puntos de magia de personaje.
+	 */
+	private static final double MULTIPLICADORMGA = 1.5;
+	/**
+	 * Fuerza inicial del personaje.
+	 */
+	private static final int FUERZAINICIAL = 10;
+	/**
+	 * Destreza inicial del personaje.
+	 */
+	private static final int DESTREZAINICIAL = 10;
+	/**
+	 * Inteligencia inicial del personaje.
+	 */
+	private static final int INTELIGENCIANICIAL = 10;
+	
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
 	}
