@@ -17,6 +17,7 @@ import estados.EstadoBatalla;
 import estados.EstadoJuego;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
+import mensajeria.PaqueteBatalla;
 
 public class Juego implements Runnable {
 
@@ -159,6 +160,7 @@ public class Juego implements Runnable {
 
 		estadoJuego = new EstadoJuego(this);
 		Estado.setEstado(estadoJuego);
+				
 		pantalla.mostrar();
 		corriendo = true;
 		hilo = new Thread(this);

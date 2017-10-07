@@ -25,8 +25,10 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+
+
 	private ArrayList<Item> items = new ArrayList<Item>();
-	
+		
 	public PaquetePersonaje() throws IOException {
 		estado = Estado.estadoOffline;
 	}
@@ -234,7 +236,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	}
 
 	public Iterator<Item> getIterator() {
-		// TODO Auto-generated method stub
 		return items.iterator();
 	}
 
