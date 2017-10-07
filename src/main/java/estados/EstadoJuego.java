@@ -82,6 +82,7 @@ public class EstadoJuego extends Estado {
 			menuEnemigo.graficar(g, tipoSolicitud);
 
 	}
+	
 
 	public void graficarPersonajes(Graphics g) {
 
