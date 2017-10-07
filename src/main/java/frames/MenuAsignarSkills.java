@@ -224,7 +224,7 @@ public class MenuAsignarSkills extends JFrame {
 							buttonMore1.setEnabled(true);
 							buttonMore2.setEnabled(true);
 					}*/
-					
+
 					if(comprobarCambiosRealizados()) {
 						buttonConfirm.setEnabled(false);
 					}else {
@@ -251,11 +251,13 @@ public class MenuAsignarSkills extends JFrame {
 		
 		buttonMinus1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				if((puntosAsignadosDestrezaInicialmente + puntosAsignadosDestreza) > 0) {
 					puntosAsignadosDestreza--;
 					puntosAsignar++;
 
 					/*if(puntosAsignar == 0){
+
 						if(puntosInteligenciaTotal != 200){
 							buttonMore2.setEnabled(true);
 						}
@@ -366,6 +368,7 @@ public class MenuAsignarSkills extends JFrame {
 							buttonConfirm.setEnabled(true);
 					}
 					
+
 					if(puntosAsignar == 0){
 						buttonMore.setEnabled(false);
 						buttonMore1.setEnabled(false);
@@ -387,7 +390,9 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(puntosAsignar != 0 && !labelDestreza.getText().equals("200")){
+
 					puntosAsignadosDestreza++;
+
 					puntosAsignar--;
 					if(comprobarCambiosRealizados()) {
 						buttonConfirm.setEnabled(false);
@@ -396,7 +401,9 @@ public class MenuAsignarSkills extends JFrame {
 					}
 					
 					labelPuntos.setText(String.valueOf(puntosAsignar));
+
 					labelDestreza.setText(String.valueOf(puntosDestrezaTotal + puntosAsignadosDestreza));
+
 
 					if(puntosAsignar == 0){
 						buttonMore.setEnabled(false);
@@ -416,7 +423,9 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(puntosAsignar != 0 && !labelInteligencia.getText().equals("200")){
+
 					puntosAsignadosInteligencia++;
+
 					puntosAsignar--;
 					if(comprobarCambiosRealizados()) {
 						buttonConfirm.setEnabled(false);
@@ -425,7 +434,9 @@ public class MenuAsignarSkills extends JFrame {
 					}
 					
 					labelPuntos.setText(String.valueOf(puntosAsignar));
+
 					labelInteligencia.setText(String.valueOf(puntosInteligenciaTotal+puntosAsignadosInteligencia));					
+
 
 					if(puntosAsignar == 0){
 						buttonMore.setEnabled(false);
