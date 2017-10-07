@@ -51,8 +51,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	 */
 	//private static final int INTELIGENCIANICIAL = 10;
 	
-=======
-
 
 	private ArrayList<Item> items = new ArrayList<Item>();
 
@@ -92,14 +90,6 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.experiencia = experiencia;
 	}
 	
-	public int getPuntosGanados() {
-		return puntosGanados;
-	}
-
-	public void setPuntosGanados(int puntosGanados) {
-		this.puntosGanados = puntosGanados;
-	}
-
 	public int getId() {
 		return id;
 	}
