@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -93,6 +94,7 @@ public class Entidad {
 	private float xComercio;
 	private float yComercio;
 	private float [] comercio;
+	private HashMap<Integer, Animacion> movimientos = new HashMap<Integer, Animacion>();
 	
 	/**Constructor de la clase Entidad
 	 * @param juego juego con el que se instancia Entidad
@@ -126,7 +128,13 @@ public class Entidad {
 		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
 		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
 		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
-
+		
+		for(int i=0;i<8;i++) {
+			movimientos.put(i,new Animacion(velAnimacion, animaciones.get(i)));
+		}
+		
+		
+		
 		// Informo mi posicion actual
 		juego.getUbicacionPersonaje().setPosX(x);
 		juego.getUbicacionPersonaje().setPosY(y);
@@ -463,6 +471,9 @@ public class Entidad {
 	/**Obtiene el frameActual del personaje
 	 */
 	private BufferedImage getFrameAnimacionActual() {
+		BufferedImage bi = (BufferedImage) movimientos.get(movimientoHacia).getFrameActual();
+		
+		/*
 		if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrameActual();
 		} else if (movimientoHacia == horizontalDer) {
@@ -479,9 +490,14 @@ public class Entidad {
 			return moverArribaIzq.getFrameActual();
 		} else if (movimientoHacia == diagonalSupDer) {
 			return moverArribaDer.getFrameActual();
-		}
-
-		return Recursos.orco.get(6)[0];
+		}*/
+		
+		if(bi==null)
+			bi=Recursos.orco.get(6)[0];
+		return bi;
+		
+		//return Recursos.orco.get(6)[0];
+		
 	}
 	/**Pide la direccion donde va
 	 * @return devuelve el movimiento hacia donde va
@@ -492,6 +508,8 @@ public class Entidad {
 	/**Obtiene el frame donde esta el personaje
 	 */
 	private int getFrame() {
+		int frame = movimientos.get(movimientoHacia).getFrame();
+		/*
 		if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrame();
 		} else if (movimientoHacia == horizontalDer) {
@@ -508,9 +526,10 @@ public class Entidad {
 			return moverArribaIzq.getFrame();
 		} else if (movimientoHacia == diagonalSupDer) {
 			return moverArribaDer.getFrame();
-		}
+		}*/
 
-		return 0;
+		//return 0;
+		return frame;
 	}
 	/**Envia la posicion del personaje
 	 */

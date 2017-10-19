@@ -34,6 +34,7 @@ public class EstadoJuego extends Estado {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private boolean haySolicitud;
 	private int tipoSolicitud;
+	private static final String[] mundos = {"Aubenor","Aris","Eodrim"};
 
 	private final Gson gson = new Gson();
 
@@ -112,7 +113,7 @@ public class EstadoJuego extends Estado {
 	private String getMundo() {
 		int mundo = juego.getPersonaje().getMapa();
 
-		if (mundo == 1) {
+		/*if (mundo == 1) {
 			return "Aubenor";
 		} else if (mundo == 2) {
 			return "Aris";
@@ -120,7 +121,8 @@ public class EstadoJuego extends Estado {
 			return "Eodrim";
 		}
 
-		return null;
+		return null;*/
+		return mundos[mundo-1];
 	}
 
 	public void setHaySolicitud(boolean b, PaquetePersonaje enemigo, int tipoSolicitud) {
