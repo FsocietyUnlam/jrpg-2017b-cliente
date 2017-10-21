@@ -648,9 +648,9 @@ public class Entidad {
 	 * @return true or false
 	 */
 	private boolean estanEnDiagonal(final Nodo nodoUno, final Nodo nodoDos) {
-		if (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY())
-			return false;
-		return true;
+		return (nodoUno.obtenerX() == nodoDos.obtenerX() || nodoUno.obtenerY() == nodoDos.obtenerY());
+			//return false;
+		//return true;
 	}
 	/**Pide el valor de X 
 	 * @return devuelve la ubicacion en X
