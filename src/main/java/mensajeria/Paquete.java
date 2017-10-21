@@ -68,24 +68,24 @@ public class Paquete implements Serializable, Cloneable {
 		return obj;
 	}
 	
-	public Comando getObjeto(String nombrePaquete) {
-		try {
+	public Comando getObjeto(String nombrePaquete) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+		//try {
 			Comando c;
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMES[comando]).newInstance();
 			return c;
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			return null;
-		}
-
+		//} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			//return null;
+		//}
 	}
-	public static Comando getObjetoSet(String nombrePaquete, int accion) {
-		try {
+	
+	public static Comando getObjetoSet(String nombrePaquete, int accion) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	//	try {
 			Comando c;
 			c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMESBIS[accion]).newInstance();
 			return c;
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			return null;
-		}
+		//} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			//return null;
+		//}
 
 	}
 
