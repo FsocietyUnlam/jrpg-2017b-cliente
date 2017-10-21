@@ -146,23 +146,31 @@ public class Entidad {
 	public void actualizar() {
 
 		if (enMovimiento) {
-			moverIzq.actualizar();
-			moverArribaIzq.actualizar();
-			moverArriba.actualizar();
-			moverArribaDer.actualizar();
-			moverDer.actualizar();
-			moverAbajoDer.actualizar();
-			moverAbajo.actualizar();
-			moverAbajoIzq.actualizar();
+//			moverIzq.actualizar();
+//			moverArribaIzq.actualizar();
+//			moverArriba.actualizar();
+//			moverArribaDer.actualizar();
+//			moverDer.actualizar();
+//			moverAbajoDer.actualizar();
+//			moverAbajo.actualizar();
+//			moverAbajoIzq.actualizar();
+			
+			for(int i=0;i<8;i++) {
+				movimientos.get(i).actualizar();
+			}
 		} else {
-			moverIzq.reset();
-			moverArribaIzq.reset();
-			moverArriba.reset();
-			moverArribaDer.reset();
-			moverDer.reset();
-			moverAbajoDer.reset();
-			moverAbajo.reset();
-			moverAbajoIzq.reset();
+//			moverIzq.reset();
+//			moverArribaIzq.reset();
+//			moverArriba.reset();
+//			moverArribaDer.reset();
+//			moverDer.reset();
+//			moverAbajoDer.reset();
+//			moverAbajo.reset();
+//			moverAbajoIzq.reset();
+			
+			for(int i=0;i<8;i++) {
+				movimientos.get(i).reset();
+			}
 		}
 
 		getEntrada();
@@ -415,8 +423,9 @@ public class Entidad {
 		dy = 0;
 
 		double paso = 1;
-
+		
 		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
+			
 			if (movimientoHacia == verticalSup) {
 				dy -= paso;
 			} else if (movimientoHacia == verticalInf) {
@@ -438,6 +447,8 @@ public class Entidad {
 				dx -= paso;
 				dy -= paso / 2;
 			}
+			
+			
 
 			x += dx;
 			y += dy;
@@ -471,10 +482,10 @@ public class Entidad {
 	/**Obtiene el frameActual del personaje
 	 */
 	private BufferedImage getFrameAnimacionActual() {
-		BufferedImage bi = (BufferedImage) movimientos.get(movimientoHacia).getFrameActual();
+		BufferedImage bi = movimientos.get(movimientoHacia).getFrameActual();
 		
-		/*
-		if (movimientoHacia == horizontalIzq) {
+		
+		/*if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrameActual();
 		} else if (movimientoHacia == horizontalDer) {
 			return moverDer.getFrameActual();
@@ -509,8 +520,8 @@ public class Entidad {
 	 */
 	private int getFrame() {
 		int frame = movimientos.get(movimientoHacia).getFrame();
-		/*
-		if (movimientoHacia == horizontalIzq) {
+		
+		/*if (movimientoHacia == horizontalIzq) {
 			return moverIzq.getFrame();
 		} else if (movimientoHacia == horizontalDer) {
 			return moverDer.getFrame();
@@ -526,9 +537,12 @@ public class Entidad {
 			return moverArribaIzq.getFrame();
 		} else if (movimientoHacia == diagonalSupDer) {
 			return moverArribaDer.getFrame();
-		}*/
+		}
 
-		//return 0;
+		return 0;*/
+		if (movimientoHacia < 0 && movimientoHacia > 7)
+			frame=0;
+		
 		return frame;
 	}
 	/**Envia la posicion del personaje
