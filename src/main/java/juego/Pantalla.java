@@ -129,7 +129,10 @@ public class Pantalla {
 							ventContac.setVisible(true);
 						}
 				}*/
-				comandos.get(e.getKeyCode()).run();
+				Runnable comando = comandos.get(e.getKeyCode());
+				
+				if(comando!=null)
+					comando.run();
 			}
 		});
 
