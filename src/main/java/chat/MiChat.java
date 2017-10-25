@@ -144,7 +144,7 @@ public class MiChat extends JFrame {
 		background.setBounds(-20, 0, 480, 283);
 		contentPane.add(background);
 	}
-	
+	//Obtener JTextArea del chat. borrar este comentario.
 	public JTextArea getChat() {
 		return chat;
 	}
