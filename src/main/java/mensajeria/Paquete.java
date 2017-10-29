@@ -12,6 +12,7 @@ public class Paquete implements Serializable, Cloneable {
 	private String mensaje;
 	private String ip;
 	private int comando;
+	
 	public Paquete() {
 
 	}
@@ -68,7 +69,7 @@ public class Paquete implements Serializable, Cloneable {
 		return obj;
 	}
 	
-	public Comando getObjeto(String nombrePaquete) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+	public Comando getObjeto(String nombrePaquete)  throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 		//try {
 			Comando c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMES[comando]).newInstance();
 			return c;
@@ -79,7 +80,7 @@ public class Paquete implements Serializable, Cloneable {
 	
 	public static Comando getObjetoSet(String nombrePaquete, int accion) throws InstantiationException, IllegalAccessException, ClassNotFoundException {
 	//	try {
-			Comando c=(Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMESBIS[accion]).newInstance();
+			Comando c = (Comando) Class.forName(nombrePaquete + "." + Comando.CLASSNAMESBIS[accion]).newInstance();
 			return c;
 		//} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 			//return null;

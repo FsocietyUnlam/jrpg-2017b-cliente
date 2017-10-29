@@ -81,7 +81,6 @@ public class EstadoBatalla extends Estado {
 
 	@Override
 	public void actualizar() {
-
 		juego.getCamara().setxOffset(-350);
 		juego.getCamara().setyOffset(150);
 
@@ -148,7 +147,7 @@ public class EstadoBatalla extends Estado {
 								MenuInfoPersonaje.menuGanarBatalla);
 						if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
 							juego.getPersonaje().setNivel(personaje.getNivel());
-							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(),MenuInfoPersonaje.menuSubirNivel);
+							juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuSubirNivel);
 						}
 						paqueteFinalizarBatalla.setGanadorBatalla(juego.getPersonaje().getId());
 						finalizarBatalla();

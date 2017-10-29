@@ -33,15 +33,14 @@ public class MenuStats extends JFrame {
 		/**
 		 * Create the frame.
 		 */
+		
 		public MenuStats(final Cliente cliente) {
 			paquetePersonaje = cliente.getPaquetePersonaje();
-			
 			this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			this.setResizable(false);
 			this.setBounds(100, 100, 346, 321);
 			this.setLocationRelativeTo(null);
 			this.setTitle("Estadísticas");
-			
 			contentPane = new JPanel();
 			contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 			setContentPane(contentPane);
@@ -235,10 +234,10 @@ public class MenuStats extends JFrame {
 		}
 
 		private int calcularMagia(final int inteligencia) {
-			return (int) (inteligencia*mod);
+			return (int) (inteligencia * mod);
 		}
 
 		private int calcularAtaque(final int fuerza) {
-			return (int) (fuerza*mod);
+			return (int) (fuerza * mod);
 		}
 }

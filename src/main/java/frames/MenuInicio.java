@@ -37,7 +37,7 @@ public class MenuInicio extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+				new Point(0, 0), "custom cursor"));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 

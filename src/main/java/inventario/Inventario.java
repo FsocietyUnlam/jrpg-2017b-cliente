@@ -23,7 +23,7 @@ public class Inventario extends JPanel {
         setLayout(new GridBagLayout());
         items = new ArrayList<Item>(paquetePersonaje.getItems());
         GridBagConstraints gbc = new GridBagConstraints();
-        for (int row = 0; row <CANTFILAS; row++) {
+        for (int row = 0; row < CANTFILAS; row++) {
             for (int col = 0; col < CANTCOLUMNAS; col++) {
                 gbc.gridx = col;
                 gbc.gridy = row;

@@ -44,9 +44,9 @@ public class Pantalla {
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
-	
+
 	private final Gson gson = new Gson();
-	
+
 	private Cliente cliente;
 	private HashMap<Integer, Runnable> comandos;
 
@@ -54,8 +54,8 @@ public class Pantalla {
 		pantalla = new JFrame(NOMBRE);
 		pantalla.setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		pantalla.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-			new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-			new Point(0,0),"custom cursor"));
+				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
+				"custom cursor"));
 
 		pantalla.setSize(ANCHO, ALTO);
 		pantalla.setResizable(false);
@@ -78,64 +78,44 @@ public class Pantalla {
 				}
 			}
 		});
-		
-		this.cliente=cliente;
-		comandos =new HashMap<Integer, Runnable>() {
+
+		this.cliente = cliente;
+		comandos = new HashMap<Integer, Runnable>() {
 			{
-				put(73,() -> mostrarInventario()); 			//Tecla I
-				put(65,() -> mostrarMenuAsignarSkills()); 	//Tecla A
-				put(83,() -> mostrarMenuStats());			//Tecla S
-				put(27,() -> mostrarMenuEscape());			//Tecla ESC
-				put(67,() -> mostrarVentanaContactos());	//Tecla C
+				put(73, () -> mostrarInventario()); // Tecla I
+				put(65, () -> mostrarMenuAsignarSkills()); // Tecla A
+				put(83, () -> mostrarMenuStats()); // Tecla S
+				put(27, () -> mostrarMenuEscape()); // Tecla ESC
+				put(67, () -> mostrarVentanaContactos()); // Tecla C
 			}
 
 		};
-		
+
 		pantalla.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				/*
-				if (e.getKeyCode() == KeyEvent.VK_I) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuInventario == null) {
-							menuInventario = new MenuInventario(cliente);
-							menuInventario.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_A) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuAsignar == null) {
-							menuAsignar = new MenuAsignarSkills(cliente);
-							menuAsignar.setVisible(true);
-						}
-					} 
-				} else if (e.getKeyCode() == KeyEvent.VK_S) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuStats == null) {
-							menuStats = new MenuStats(cliente);
-							menuStats.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-					if(Estado.getEstado().esEstadoDeJuego()) {
-						if (menuEscp == null) {
-							menuEscp = new MenuEscape(cliente);
-							menuEscp.setVisible(true);
-						}
-					}
-				} else if (e.getKeyCode() == KeyEvent.VK_C) {
-						if (ventContac == null) {
-							ventContac = new VentanaContactos(cliente.getJuego());
-							ventContac.setVisible(true);
-						}
-				}*/
+				 * if (e.getKeyCode() == KeyEvent.VK_I) {
+				 * if(Estado.getEstado().esEstadoDeJuego()) { if (menuInventario == null) {
+				 * menuInventario = new MenuInventario(cliente);
+				 * menuInventario.setVisible(true); } } } else if (e.getKeyCode() ==
+				 * KeyEvent.VK_A) { if(Estado.getEstado().esEstadoDeJuego()) { if (menuAsignar
+				 * == null) { menuAsignar = new MenuAsignarSkills(cliente);
+				 * menuAsignar.setVisible(true); } } } else if (e.getKeyCode() == KeyEvent.VK_S)
+				 * { if(Estado.getEstado().esEstadoDeJuego()) { if (menuStats == null) {
+				 * menuStats = new MenuStats(cliente); menuStats.setVisible(true); } } } else if
+				 * (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+				 * if(Estado.getEstado().esEstadoDeJuego()) { if (menuEscp == null) { menuEscp =
+				 * new MenuEscape(cliente); menuEscp.setVisible(true); } } } else if
+				 * (e.getKeyCode() == KeyEvent.VK_C) { if (ventContac == null) { ventContac =
+				 * new VentanaContactos(cliente.getJuego()); ventContac.setVisible(true); } }
+				 */
 				Runnable comando = comandos.get(e.getKeyCode());
-				
-				if(comando!=null)
+
+				if (comando != null)
 					comando.run();
 			}
 		});
-
 
 		pantalla.setLocationRelativeTo(null);
 		pantalla.setVisible(false);
@@ -149,43 +129,43 @@ public class Pantalla {
 		pantalla.add(canvas);
 		pantalla.pack();
 	}
-	
+
 	private void mostrarInventario() {
-		if(Estado.getEstado().esEstadoDeJuego() && menuInventario == null) {
-			//if (menuInventario == null) {
-				menuInventario = new MenuInventario(cliente);
-				menuInventario.setVisible(true);
-			//}
+		if (Estado.getEstado().esEstadoDeJuego() && menuInventario == null) {
+			// if (menuInventario == null) {
+			menuInventario = new MenuInventario(cliente);
+			menuInventario.setVisible(true);
+			// }
 		}
 	}
-	
+
 	private void mostrarMenuAsignarSkills() {
-		if(Estado.getEstado().esEstadoDeJuego() && menuAsignar == null) {
-			//if (menuAsignar == null) {
-				menuAsignar = new MenuAsignarSkills(cliente);
-				menuAsignar.setVisible(true);
-			//}
-		} 
+		if (Estado.getEstado().esEstadoDeJuego() && menuAsignar == null) {
+			// if (menuAsignar == null) {
+			menuAsignar = new MenuAsignarSkills(cliente);
+			menuAsignar.setVisible(true);
+			// }
+		}
 	}
-	
+
 	private void mostrarMenuStats() {
-		if(Estado.getEstado().esEstadoDeJuego() && menuStats == null) {
-			//if (menuStats == null) {
-				menuStats = new MenuStats(cliente);
-				menuStats.setVisible(true);
-			//}
+		if (Estado.getEstado().esEstadoDeJuego() && menuStats == null) {
+			// if (menuStats == null) {
+			menuStats = new MenuStats(cliente);
+			menuStats.setVisible(true);
+			// }
 		}
 	}
-	
+
 	private void mostrarMenuEscape() {
-		if(Estado.getEstado().esEstadoDeJuego() && menuEscp == null) {
-			//if (menuEscp == null) {
-				menuEscp = new MenuEscape(cliente);
-				menuEscp.setVisible(true);
-			//}
+		if (Estado.getEstado().esEstadoDeJuego() && menuEscp == null) {
+			// if (menuEscp == null) {
+			menuEscp = new MenuEscape(cliente);
+			menuEscp.setVisible(true);
+			// }
 		}
 	}
-	
+
 	private void mostrarVentanaContactos() {
 		if (ventContac == null) {
 			ventContac = new VentanaContactos(cliente.getJuego());
@@ -206,17 +186,17 @@ public class Pantalla {
 	}
 
 	public static void centerString(Graphics g, Rectangle r, String s) {
-	    FontRenderContext frc = new FontRenderContext(null, true, true);
+		FontRenderContext frc = new FontRenderContext(null, true, true);
 
-	    Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
-	    int rWidth = (int) Math.round(r2D.getWidth());
-	    int rHeight = (int) Math.round(r2D.getHeight());
-	    int rX = (int) Math.round(r2D.getX());
-	    int rY = (int) Math.round(r2D.getY());
+		Rectangle2D r2D = g.getFont().getStringBounds(s, frc);
+		int rWidth = (int) Math.round(r2D.getWidth());
+		int rHeight = (int) Math.round(r2D.getHeight());
+		int rX = (int) Math.round(r2D.getX());
+		int rY = (int) Math.round(r2D.getY());
 
-	    int a = (r.width / 2) - (rWidth / 2) - rX;
-	    int b = (r.height / 2) - (rHeight / 2) - rY;
+		int a = (r.width / 2) - (rWidth / 2) - rX;
+		int b = (r.height / 2) - (rHeight / 2) - rY;
 
-	    g.drawString(s, r.x + a, r.y + b);
+		g.drawString(s, r.x + a, r.y + b);
 	}
 }

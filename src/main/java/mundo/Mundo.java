@@ -52,17 +52,17 @@ public class Mundo {
 					int map = juego.getPersonaje().getMapa();
 					if (map == 1) {
 						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					} else if (map == 2) {
 						Tile.aris[Tile.arisBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					} else if (map == 3) {
 						Tile.aubenor[Tile.aubenorBase].graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32),64,64);
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 					}
-					if(!getTile(j,i).esSolido())
-						getTile(j,i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-								(int) (iso[1] - juego.getCamara().getyOffset() - 32 ),64,64);
+					if (!getTile(j, i).esSolido())
+						getTile(j, i).graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
+								(int) (iso[1] - juego.getCamara().getyOffset() - 32), 64, 64);
 				}
 			}
 		}
@@ -74,11 +74,11 @@ public class Mundo {
 			for (int j = 0; j < ancho; j++) {
 				iso = dosDaIso(j, i);
 				// Grafico al personaje
-				if(Estado.getEstado() == juego.getEstadoJuego())
+				if (Estado.getEstado() == juego.getEstadoJuego())
 					if (Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
 							juego.getUbicacionPersonaje().getPosY())[0] == j
 							&& Mundo.mouseATile(juego.getUbicacionPersonaje().getPosX(),
-									juego.getUbicacionPersonaje().getPosY())[1] == i )
+									juego.getUbicacionPersonaje().getPosY())[1] == i)
 						juego.getEstadoJuego().getPersonaje().graficar(g);
 
 				// Grafico los obstaculos
@@ -86,7 +86,7 @@ public class Mundo {
 						&& getTile(j, i).esSolido()) {
 					obst = getTile(j, i);
 					obst.graficar(g, (int) (iso[0] - juego.getCamara().getxOffset()),
-							(int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto()/2), obst.getAncho(),
+							(int) (iso[1] - juego.getCamara().getyOffset() - obst.getAlto() / 2), obst.getAncho(),
 							obst.getAlto());
 				}
 			}
