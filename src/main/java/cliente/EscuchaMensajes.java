@@ -17,6 +17,7 @@ import mensajeria.PaquetePersonaje;
  * esuchar los mensajes que se enviaran
  * al servidor.
  */
+
 public class EscuchaMensajes extends Thread {
 
 	private Juego juego;
@@ -50,7 +51,7 @@ public class EscuchaMensajes extends Thread {
 
 				String objetoLeido = (String) entrada.readObject();
 
-				paquete = gson.fromJson(objetoLeido , Paquete.class);
+				paquete = gson.fromJson(objetoLeido, Paquete.class);
 				comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
 				comand.setJuego(juego);
 				comand.setCadena(objetoLeido);

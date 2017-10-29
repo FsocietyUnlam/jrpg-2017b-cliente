@@ -1,6 +1,7 @@
 package entidades;
 /**Clase Nodo de Pila
  */
+
 public class NodoDePila {
 
 	private int x;

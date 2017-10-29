@@ -45,14 +45,14 @@ public class MenuCreacionPj extends JFrame {
 	public MenuCreacionPj(final Cliente cliente, final PaquetePersonaje personaje, final Gson gson) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(), new Point(0, 0),
+				"custom cursor"));
 
-		final String vecSalud[] = { "55", "50", "60" };
-		final String vecEnergia[] = { "55", "60", "50" };
-		final String vecFuerza[] = { "15", "10", "10" };
-		final String vecDestreza[] = { "10", "10", "15" };
-		final String vecInteligencia[] = { "10", "15", "10" };
+		final String vecSalud[] = {"55", "50", "60"};
+		final String vecEnergia[] = {"55", "60", "50"};
+		final String vecFuerza[] = {"15", "10", "10"};
+		final String vecDestreza[] = {"10", "10", "15"};
+		final String vecInteligencia[] = {"10", "15", "10"};
 
 		// En caso de cerrar
 		addWindowListener(new WindowAdapter() {
@@ -67,7 +67,8 @@ public class MenuCreacionPj extends JFrame {
 				personaje.setCasta((String) cbxCasta.getSelectedItem());
 				personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
 				personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
-				personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
+				personaje.setInteligencia(
+						Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
 				synchronized (cliente) {
 					cliente.notify();
 				}
@@ -153,7 +154,8 @@ public class MenuCreacionPj extends JFrame {
 		nombre = new JTextField();
 		nombre.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
+				crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza,
+						vecInteligencia);
 			}
 		});
 		nombre.setBounds(277, 122, 122, 20);
@@ -176,11 +178,10 @@ public class MenuCreacionPj extends JFrame {
 		btnAceptar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza, vecInteligencia);
+				crearPj(cliente, personaje, gson, vecSalud, vecEnergia, vecFuerza, vecDestreza,
+						vecInteligencia);
 
-				
 			}
-
 
 		});
 
@@ -233,28 +234,27 @@ public class MenuCreacionPj extends JFrame {
 
 	protected void crearPj(Cliente cliente, PaquetePersonaje personaje, Gson gson, String[] vecSalud,
 			String[] vecEnergia, String[] vecFuerza, String[] vecDestreza, String[] vecInteligencia) {
-		
-			personaje.setNombre(nombre.getText());
-			if (nombre.getText().equals(""))
-				personaje.setNombre("nameless");
-			personaje.setRaza((String) cbxRaza.getSelectedItem());
-			personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
-			personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
-			personaje.setCasta((String) cbxCasta.getSelectedItem());
-			personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
-			personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
-			personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
-			try {
-				
 
-				// Le envio los datos al servidor
-				cliente.getPaquetePersonaje().setComando(Comando.CREACIONPJ);
-				cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
-				dispose();
-			} catch (JsonSyntaxException | IOException esd) {
-				JOptionPane.showMessageDialog(null, "Error al crear personaje");
+		personaje.setNombre(nombre.getText());
+		if (nombre.getText().equals(""))
+			personaje.setNombre("nameless");
+		personaje.setRaza((String) cbxRaza.getSelectedItem());
+		personaje.setSaludTope(Integer.parseInt(vecSalud[cbxRaza.getSelectedIndex()]));
+		personaje.setEnergiaTope(Integer.parseInt(vecEnergia[cbxRaza.getSelectedIndex()]));
+		personaje.setCasta((String) cbxCasta.getSelectedItem());
+		personaje.setFuerza(Integer.parseInt(vecFuerza[cbxCasta.getSelectedIndex()]));
+		personaje.setDestreza(Integer.parseInt(vecDestreza[cbxCasta.getSelectedIndex()]));
+		personaje.setInteligencia(Integer.parseInt(vecInteligencia[cbxCasta.getSelectedIndex()]));
+		try {
 
-			}
+			// Le envio los datos al servidor
+			cliente.getPaquetePersonaje().setComando(Comando.CREACIONPJ);
+			cliente.getSalida().writeObject(gson.toJson(cliente.getPaquetePersonaje()));
+			dispose();
+		} catch (JsonSyntaxException | IOException esd) {
+			JOptionPane.showMessageDialog(null, "Error al crear personaje");
+
 		}
-		
+	}
+
 }

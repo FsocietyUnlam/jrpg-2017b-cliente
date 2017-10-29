@@ -24,15 +24,15 @@ public class MenuCarga extends JFrame {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new ImageIcon(MenuJugar.class.getResource("/cursor.png")).getImage(),
-				new Point(0,0),"custom cursor"));
+				new Point(0, 0), "custom cursor"));
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
 		// En caso de cerrar la ventana
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) {
-				synchronized(cliente){
+			public void windowClosing(final WindowEvent e) {
+				synchronized (cliente) {
 					cliente.setAccion(Comando.SALIR);
 					cliente.notify();
 				}

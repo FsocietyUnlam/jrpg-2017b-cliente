@@ -3,11 +3,13 @@ package entidades;
  * donde se encuentran todos los tiles
  * del personaje
  */
+
 public class PilaDeTiles {
 
 	NodoDePila ptrPila;
 	/**Constructor de la Clase Nodo de Tiles
 	 */
+	
 	public PilaDeTiles() {
 		ptrPila = null;
 	}

@@ -29,7 +29,8 @@ public class Juego implements Runnable {
 	private Thread hilo;
 	private boolean corriendo;
 
-	private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los buffer/s y finalmente en el canvas)
+	private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los
+								// buffer/s y finalmente en el canvas)
 	private Graphics g;
 
 	// Estados
@@ -50,7 +51,6 @@ public class Juego implements Runnable {
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
-
 
 	private CargarRecursos cargarRecursos;
 
@@ -108,7 +108,7 @@ public class Juego implements Runnable {
 		g.clearRect(0, 0, ANCHO, ALTO); // Limpiamos la pantalla
 
 		// Graficado de imagenes
-		g.setFont(new Font("Book Antiqua",1,15));
+		g.setFont(new Font("Book Antiqua", 1, 15));
 
 		if (Estado.getEstado() != null) {
 			Estado.getEstado().graficar(g);
@@ -133,8 +133,10 @@ public class Juego implements Runnable {
 
 		while (corriendo) {
 			ahora = System.nanoTime();
-			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo  para determinar cuando realizar la actualizacion y el graficado
-			timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los FPS
+			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo para determinar cuando realizar la
+																		// actualizacion y el graficado
+			timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los
+											// FPS
 			ultimoTiempo = ahora; // Para las proximas corridas del bucle
 
 			if (delta >= 1) {
@@ -160,7 +162,7 @@ public class Juego implements Runnable {
 
 		estadoJuego = new EstadoJuego(this);
 		Estado.setEstado(estadoJuego);
-				
+
 		pantalla.mostrar();
 		corriendo = true;
 		hilo = new Thread(this);
@@ -198,11 +200,11 @@ public class Juego implements Runnable {
 		return (EstadoJuego) estadoJuego;
 	}
 
-	public EstadoBatalla getEstadoBatalla(){
+	public EstadoBatalla getEstadoBatalla() {
 		return (EstadoBatalla) estadoBatalla;
 	}
 
-	public void setEstadoBatalla(EstadoBatalla estadoBatalla){
+	public void setEstadoBatalla(final EstadoBatalla estadoBatalla) {
 		this.estadoBatalla = estadoBatalla;
 	}
 
@@ -218,7 +220,7 @@ public class Juego implements Runnable {
 		return paquetePersonaje;
 	}
 
-	public PaqueteMovimiento getUbicacionPersonaje(){
+	public PaqueteMovimiento getUbicacionPersonaje() {
 		return ubicacionPersonaje;
 	}
 
@@ -237,7 +239,7 @@ public class Juego implements Runnable {
 	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
 		this.personajesConectados = map;
 	}
-	
+
 	public Map<Integer, PaqueteMovimiento> getUbicacionPersonajes() {
 		return ubicacionPersonajes;
 	}

@@ -4,16 +4,20 @@ import java.awt.image.BufferedImage;
 /**La clase Animacion tiene como función  
  * controlar las animaciones.
  */
+
 public class Animacion {
 
 	private int velocidad;
 	private int indice;
-	private long ultimoTiempo, timer;
+	private long ultimoTiempo;
+	private long timer;
 	private BufferedImage[] frames;
+	
 	/**Constructor de la clase
 	 * @param velocidad velocidad con la cual se actualiza
 	 * @param frames imagen de frame
 	 */
+	
 	public Animacion(final int velocidad, final BufferedImage[] frames) {
 		this.velocidad = velocidad;
 		this.frames = frames;
