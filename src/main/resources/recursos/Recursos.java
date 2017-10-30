@@ -14,20 +14,27 @@ import frames.MenuMapas;
 import mundo.Tile;
 
 /**
- * 
- * @author joria
- * Clase Recursos
+ * Clase Recursos.
  */
 public class Recursos {
 
-	private static int ELEMENTOS = 65;
-	private static int ANCHOBARRA = 345;
-
-	private static final int ANCHO = 256; // Ancho del frame a obtener
-	private static final int ALTO = 256; // Alto del frame a obtener
-
-	// Inicio Personajes
-	// Hash de imagenes para los personajes (humano, ogro, elfo)
+	private static final int ELEMENTOS = 65;
+	/**
+	 * Ancho de la barra.
+	 */
+	private static final int ANCHOBARRA = 345;
+	/**
+	 * Ancho del frame a obtener.
+	 */
+	private static final int ANCHO = 256;
+	/**
+	 * Alto del frame a obtener.
+	 */
+	private static final int ALTO = 256;
+	/**
+	 * Inicio Personajes. Hash de imagenes
+	 * para los personajes (humano, ogro, elfo).
+	 */
 	public static Map<String, LinkedList<BufferedImage[]>> personaje = new HashMap<>();
 
 	private static SpriteSheet spriteHumano;
@@ -80,22 +87,59 @@ public class Recursos {
 	// Batalla
 	public static BufferedImage barraSpells;
 	public static BufferedImage estadoPersonaje;
+	/**
+	 * Buffer de imagen para barra de salud.
+	 */
 	public static BufferedImage barraSalud;
+	/**
+	 * Buffer de imagen para bara de energia.
+	 */
 	public static BufferedImage barraEnergia;
+	/**
+	 * Buffer de imagen para barra de experiencia.
+	 */
 	public static BufferedImage barraExperiencia;
+	/**
+	 * Buffer de imagen para no menu de btalla.
+	 */
 	public static BufferedImage menuBatalla;
+	/**
+	 * Buffer de imagen para no menu batalla deshabilitado.
+	 */
 	public static BufferedImage menuBatallaDeshabilitado;
+	/**
+	 * Buffer de imagen para no item.
+	 */
 	public static BufferedImage noItem;
+	/**
+	 * Buffer de imagen para la mochila.
+	 */
 	public static BufferedImage mochila;
+	/**
+	 * Buffer de imagen para el menu.
+	 */
 	public static BufferedImage menu;
+	/**
+	 * Buffer de imagen para el chat.
+	 */
 	public static BufferedImage chat;
+	/**
+	 * Hashmap que contiene los buffers de imagenes
+	 * de las habilidades.
+	 */
 	public static Map<String, BufferedImage> habilidades = new HashMap<>();
 	// Fin Batalla
-	
-	public static final int TAMANIO_BUFFER = 4;
+	/**
+	 * Tamaño del buffer.
+	 */
+	private static final int TAMANIO_BUFFER = 4;
 
-	// Se cargan todos los recursos del juego una sola vez al inicio
-
+	/***
+	 *  Se cargan todos los recursos del juego una sola vez al inicio.
+	 * @param menuCarga menuCarga {MenuCarga} Menu Actual.
+	 * @throws NumberFormatException
+	 * @throws IOException
+	 */
 	public static void cargar(MenuCarga menuCarga) throws NumberFormatException, IOException {
 
 		int elementosCargados = 0;
@@ -458,7 +502,13 @@ public class Recursos {
 		// Fin Batalla
 	}
 
-	private static void actualizarBarraDeCarga(int elementosCargados, MenuCarga menuCarga) {
+	/**
+	 * Metodo que se utiliza para actualizar el
+	 * progreso de la barra de estado.
+	 * @param elementosCargados {int} Cantidad de elementos.
+	 * @param menuCarga {MenuCarga} Menu a cargar.
+	 */
+	private static void actualizarBarraDeCarga(final int elementosCargados, final MenuCarga menuCarga) {
 		menuCarga.setBarraCargando(elementosCargados * ANCHOBARRA / ELEMENTOS);
 	}
 }
