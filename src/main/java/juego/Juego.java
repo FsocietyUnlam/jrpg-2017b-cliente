@@ -29,8 +29,13 @@ public class Juego implements Runnable {
 	private Thread hilo;
 	private boolean corriendo;
 
-	private BufferStrategy bs; // Estrategia para graficar mediante buffers (Primero se "grafica" en el/los
-								// buffer/s y finalmente en el canvas)
+	/**
+	 * Estrategia para graficar mediante buffers.
+	 * Primero se "grafica" en el/los
+	 * buffer/s y finalmente en el canvas.
+	 */
+	private BufferStrategy bs;
+
 	private Graphics g;
 
 	// Estados
@@ -52,9 +57,27 @@ public class Juego implements Runnable {
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
 
+	/**
+	 * FPS que de desean obtener.
+	 */
+	private static final int FPS_DESEADOS = 60;
+	
+	/**
+	 * Un segundo expresado en nanosegundos.
+	 */
+	private static final int UN_SEGUNDO = 1000000000;
 	private CargarRecursos cargarRecursos;
 
-	public Juego(final String nombre, final int ancho, final int alto, Cliente cliente, PaquetePersonaje pp) {
+	/**
+	 * Constructor de la clase.
+	 * @param nombre {String} Nombre del juego.
+	 * @param ancho {int} Ancho de la pantalla.
+	 * @param alto {int} Alto de la pantalla.
+	 * @param cliente {Cliente} Cliente actual.
+	 * @param pp {PaquetePersonaje} Personaje actual.
+	 */
+	public Juego(final String nombre, final int ancho,
+			final int alto,	final Cliente cliente, final PaquetePersonaje pp) {
 		this.NOMBRE = nombre;
 		this.ALTO = alto;
 		this.ANCHO = ancho;
@@ -123,8 +146,8 @@ public class Juego implements Runnable {
 	@Override
 	public void run() { // Hilo principal del juego
 
-		int fps = 60; // Cantidad de actualizaciones por segundo que se desean
-		double tiempoPorActualizacion = 1000000000 / fps; // Cantidad de nanosegundos en FPS deseados
+		int fps = FPS_DESEADOS; // Cantidad de actualizaciones por segundo que se desean
+		double tiempoPorActualizacion = UN_SEGUNDO / fps; // Cantidad de nanosegundos en FPS deseados
 		double delta = 0;
 		long ahora;
 		long ultimoTiempo = System.nanoTime();
@@ -133,10 +156,14 @@ public class Juego implements Runnable {
 
 		while (corriendo) {
 			ahora = System.nanoTime();
-			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion; // Calculo para determinar cuando realizar la
-																		// actualizacion y el graficado
-			timer += ahora - ultimoTiempo; // Sumo el tiempo transcurrido hasta que se acumule 1 segundo y mostrar los
-											// FPS
+			/*Calculo para determinar cuando realizar la
+			actualizacion y el graficado*/
+			delta += (ahora - ultimoTiempo) / tiempoPorActualizacion;
+
+			/*// Sumo el tiempo transcurrido hasta que se acumule
+			 * 1 segundo y mostrar los FPS*/
+			timer += ahora - ultimoTiempo;
+
 			ultimoTiempo = ahora; // Para las proximas corridas del bucle
 
 			if (delta >= 1) {
@@ -146,7 +173,7 @@ public class Juego implements Runnable {
 				delta--;
 			}
 
-			if (timer >= 1000000000) { // Si paso 1 segundo muestro los FPS
+			if (timer >= UN_SEGUNDO) { // Si paso 1 segundo muestro los FPS
 				pantalla.getFrame().setTitle(NOMBRE + " | " + "FPS: " + actualizaciones);
 				actualizaciones = 0;
 				timer = 0;
@@ -157,9 +184,9 @@ public class Juego implements Runnable {
 	}
 
 	public synchronized void start() { // Inicia el juego
-		if (corriendo)
+		if (corriendo) {
 			return;
-
+		}
 		estadoJuego = new EstadoJuego(this);
 		Estado.setEstado(estadoJuego);
 
@@ -224,7 +251,7 @@ public class Juego implements Runnable {
 		return ubicacionPersonaje;
 	}
 
-	public void setPersonaje(PaquetePersonaje paquetePersonaje) {
+	public void setPersonaje(final PaquetePersonaje paquetePersonaje) {
 		this.paquetePersonaje = paquetePersonaje;
 	}
 
@@ -236,7 +263,7 @@ public class Juego implements Runnable {
 		return personajesConectados;
 	}
 
-	public void setPersonajesConectados(Map<Integer, PaquetePersonaje> map) {
+	public void setPersonajesConectados(final Map<Integer, PaquetePersonaje> map) {
 		this.personajesConectados = map;
 	}
 
@@ -244,7 +271,7 @@ public class Juego implements Runnable {
 		return ubicacionPersonajes;
 	}
 
-	public void setUbicacionPersonajes(Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
+	public void setUbicacionPersonajes(final Map<Integer, PaqueteMovimiento> ubicacionPersonajes) {
 		this.ubicacionPersonajes = ubicacionPersonajes;
 	}
 
