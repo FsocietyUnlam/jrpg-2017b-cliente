@@ -29,6 +29,10 @@ public class MenuRegistro extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField pwPassword;
 
+	/**
+	 * Constructor de la clase.
+	 * @param cliente {Cliente} Cliente actual.
+	 */
 	public MenuRegistro(final Cliente cliente) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -84,7 +88,7 @@ public class MenuRegistro extends JFrame {
 		pwPassword = new JPasswordField();
 		pwPassword.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				logIn(cliente);
 				dispose();
 			}
@@ -95,7 +99,7 @@ public class MenuRegistro extends JFrame {
 		txtUsuario = new JTextField();
 		txtUsuario.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				logIn(cliente);
 				dispose();
 			}
@@ -110,29 +114,49 @@ public class MenuRegistro extends JFrame {
 		labelBackground.setIcon(new ImageIcon(MenuRegistro.class.getResource("/frames/menuBackground.jpg")));
 		btnRegistrarse.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				logIn(cliente);
 				dispose();
 			}
 		});
 	}
 
+	/**
+	 * Obtener usuario del TextField.
+	 * @return txtUsuario
+	 */
 	public JTextField gettxtUsuario() {
 		return txtUsuario;
 	}
 
-	public void settxtUsuario(JTextField txtUsuario) {
+	/**
+	 * Setear usuario en el TextField.
+	 * @param txtUsuario {JTextField} usuario.
+	 */
+	public void settxtUsuario(final JTextField txtUsuario) {
 		this.txtUsuario = txtUsuario;
 	}
 
+	/**
+	 * Obtener password del PasswordField.
+	 * @return pwPassword
+	 */
 	public JPasswordField getPasswordField() {
 		return pwPassword;
 	}
 
-	public void setPasswordField(JPasswordField pwPassword) {
+	/**
+	 * Setear password en el PasswordField.
+	 * @param pwPassword {JPasswordField} password.
+	 */
+	public void setPasswordField(final JPasswordField pwPassword) {
 		this.pwPassword = pwPassword;
 	}
 
+	/**
+	 * Método para logearse.
+	 * @param cliente {Cliente} Cliente actual.
+	 */
 	private void logIn(final Cliente cliente) {
 		synchronized (cliente) {
 			cliente.getPaqueteUsuario().setUsername(txtUsuario.getText());
