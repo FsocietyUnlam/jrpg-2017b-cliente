@@ -19,15 +19,30 @@ import cliente.Cliente;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * Clase del menu de inicio.
+ * @author Lucas
+ *
+ */
 public class MenuInicio extends JFrame {
 
+	/**
+	 * El buen serial ID.
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Panel contendor.
+	 */
 	private JPanel contentPane;
 
+	/**
+	 * Constructor del Menu de inicio.
+	 */
 	public MenuInicio() {
 		addKeyListener(new KeyAdapter() {
 			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+			public void keyPressed(final KeyEvent e) {
+				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 					Cliente cliente = new Cliente();
 					cliente.start();
 					dispose();
@@ -84,13 +99,12 @@ public class MenuInicio extends JFrame {
 		btnRegistrar.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 		btnRegistrar.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				Cliente cliente = new Cliente();
 				cliente.start();
 				dispose();
 			}
 		});
-		
 		JButton btnIniciarSesion = new JButton("Salir");
 		btnIniciarSesion.setBounds(127, 202, 191, 23);
 		layeredPane.add(btnIniciarSesion, new Integer(1));
@@ -98,11 +112,10 @@ public class MenuInicio extends JFrame {
 		btnIniciarSesion.setIcon(new ImageIcon(MenuJugar.class.getResource("/frames/BotonMenu.png")));
 		btnIniciarSesion.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				dispose();
 			}
 		});
-		
 		JLabel lblBackground = new JLabel("");
 
 		lblBackground.setBounds(0, 0, 444, 271);
@@ -110,7 +123,11 @@ public class MenuInicio extends JFrame {
 		layeredPane.add(lblBackground, new Integer(0));
 	}
 
-	public static void main(String[] args) {
+	/**
+	 * Metodo estatico para crear la instancia del menu inicio y ponerlo visible.
+	 * @param args es un vector de string.
+	 */
+	public static void main(final String[] args) {
 		new MenuInicio().setVisible(true);
 	}
 

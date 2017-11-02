@@ -9,18 +9,52 @@ import dominio.Personaje;
 import mensajeria.PaquetePersonaje;
 import recursos.Recursos;
 
+/**
+ * Clase para el estado del personaje.
+ * @author Lucas
+ *
+ */
 public class EstadoDePersonaje {
 
+	/**
+	 * Atributo estatico del tipo entero para el ancho de la barra.
+	 */
 	private static final int ANCHOBARRA = 122;
+	/**
+	 * Atributo estatico del tipo entero para el alto de salud.
+	 */
 	private static final int ALTOSALUD = 14;
+	/**
+	 * Atributo estatico del tipo entero para el alto de energia.
+	 */
 	private static final int ALTOENERGIA = 14;
+	/**
+	 * Atributo estatico del tipo entero para al de experiencia.
+	 */
 	private static final int ALTOEXPERIENCIA = 6;
+	/**
+	 * Atributo estatico del tipo entero para el de miniatura.
+	 */
 	private static final int ALTOMINIATURA = 64;
+	/**
+	 * Atributo estatico del tipo entero para ancho de miniatura.
+	 */
 	private static final int ANCHOMINIATURA = 64;
+	/**
+	 * Atributo estatico del tipo entero para el tamanio de la letra.
+	 */
 	private static final int SIZE_LETRA = 10;
 
-	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, Personaje personaje,
-			BufferedImage miniaturaPersonaje) {
+	/**
+	 * Metodo estatico para dibujar el estado del personaje.
+	 * @param g es del tipo entero
+	 * @param x es del tipo entero
+	 * @param y es del tipo entero
+	 * @param personaje es del tipo Personaje
+	 * @param miniaturaPersonaje es un BufferedImage
+	 */
+	public static void dibujarEstadoDePersonaje(final Graphics g, final int x, final int y, final Personaje personaje,
+			final BufferedImage miniaturaPersonaje) {
 
 		int drawBarra = 0;
 
@@ -67,8 +101,16 @@ public class EstadoDePersonaje {
 
 	}
 
-	public static void dibujarEstadoDePersonaje(Graphics g, int x, int y, PaquetePersonaje personaje,
-			BufferedImage miniaturaPersonaje) {
+/**
+ * Metodo estatico para dibujar los graficos del estado del personaje.
+	 * @param g es del tipo entero
+	 * @param x es del tipo entero
+	 * @param y es del tipo entero
+	 * @param personaje es del tipo Personaje
+	 * @param miniaturaPersonaje es un BufferedImage
+ */
+	public static void dibujarEstadoDePersonaje(final Graphics g, final int x, final int y, final PaquetePersonaje personaje,
+			final BufferedImage miniaturaPersonaje) {
 
 		int drawBarra = 0;
 

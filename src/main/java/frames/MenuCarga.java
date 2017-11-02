@@ -15,11 +15,26 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+/**
+ * Menu de carga.
+ * @author Lucas
+ *
+ */
 public class MenuCarga extends JFrame {
 
+	/**
+	 * Panel contenedor.
+	 */
 	private JPanel contentPane;
+	/**
+	 * Label Barra de cargando.
+	 */
 	private JLabel barraCargando;
 
+/**
+ * Constructor de la clase.
+ * @param cliente variable del tipo Cliente.
+ */
 	public MenuCarga(final Cliente cliente) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("src/main/java/frames/IconoWome.png"));
 		setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
@@ -71,7 +86,11 @@ public class MenuCarga extends JFrame {
 		lblBackground.setIcon(new ImageIcon(MenuCarga.class.getResource("/frames/menuBackground.jpg")));
 	}
 
-	public void setBarraCargando(int ancho) {
+	/**
+	 * Setear la barra de cargando.
+	 * @param ancho Indica el ancho de la barra.
+	 */
+	public void setBarraCargando(final int ancho) {
 		barraCargando.setSize(ancho, 27);
 	}
 }
