@@ -27,65 +27,72 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * Clase la cual es el menú de habilidades
- * 
+ * Clase la cual es el menú de habilidades.
+ *
  * @author Lucas
  *
  */
 public class MenuAsignarSkills extends JFrame {
-
-	private static int CANTATRIBUTOS = 3;
 	/**
-	 * vector con los puntos totales
+	 * El buen serial ID.
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Cantidad de atributos.
+	 */
+	private static final int CANTATRIBUTOS = 3;
+	/**
+	 * vector con los puntos totales.
 	 */
 	private int[] puntosTotales;
 	/**
-	 * vector con los puntos asignados en cada atributo
+	 * vector con los puntos asignados en cada atributo.
 	 */
 	private int[] puntosAsignados;
 	/**
-	 * vector con los límites mínimos
+	 * vector con los límites mínimos.
 	 */
 	private int[] puntosLimiteMinimo;
 	/**
-	 * Puntos no asignados
+	 * Puntos no asignados.
 	 */
 	private int puntosNoAsignados;
 	/**
-	 * Puntos a asignar por nivel
+	 * Puntos a asignar por nivel.
 	 */
 	private int puntosAsignarPorNivel;
 	/**
-	 * Gson
+	 * Gson.
 	 */
 	private final Gson gson = new Gson();
 	/**
-	 * Panel
+	 * Panel.
 	 */
 	private JPanel contentPane;
 	/**
-	 * vector con labels que indican los putos de los atributos
+	 * vector con labels que indican los putos de los atributos.
 	 */
 	private final JLabel[] labelPuntosAtributos;
 	/**
-	 * vector con botones more
+	 * vector con botones more.
 	 */
 	private final JButton[] buttonMore;
 	/**
-	 * vector con botones minus
+	 * vector con botones minus.
 	 */
 	private final JButton[] buttonMinus;
 	/**
-	 * boton de confirmar
+	 * boton de confirmar.
 	 */
 	private final JButton buttonConfirm;
 	/**
-	 * label con los puntos
+	 * label con los puntos.
 	 */
 	private final JLabel labelPuntos;
 
 	/**
-	 * Create the frame.
+	 *Create the frame.
+	 *@param cliente del tipo cliente
 	 */
 	public MenuAsignarSkills(final Cliente cliente) {
 
@@ -110,11 +117,11 @@ public class MenuAsignarSkills extends JFrame {
 		// CASTA.
 		String unaCasta = cliente.getPaquetePersonaje().getCasta();
 		if (unaCasta.equals("Asesino")) {
-			puntosBase[1] = 5;// dominio.Asesino.recibirDestrezaBonus();
+			puntosBase[1] = 5; // dominio.Asesino.recibirDestrezaBonus();
 		} else if (unaCasta.equals("Hechicero")) {
 			puntosBase[2] = 5;
-		} else {// GUERRERO
-			puntosBase[0] = 5;
+		} else {
+			puntosBase[0] = 5; // GUERRERO
 		}
 
 		ArrayList<Item> lista = cliente.getPaquetePersonaje().getItems();
@@ -144,7 +151,7 @@ public class MenuAsignarSkills extends JFrame {
 
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent arg0) {
+			public void windowClosing(final WindowEvent arg0) {
 				Pantalla.menuAsignar = null;
 				dispose();
 			}
@@ -197,13 +204,12 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(lblFuerza);
 
 		buttonConfirm = new JButton("Confirmar");
-		ImageIcon icono_confirm = new ImageIcon("recursos//botonConfirmar.png");
-		buttonConfirm.setIcon(icono_confirm);
+		ImageIcon iconoConfirm = new ImageIcon("recursos//botonConfirmar.png");
+		buttonConfirm.setIcon(iconoConfirm);
 		buttonConfirm.setEnabled(false);
 		buttonConfirm.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
-				;
+			public void actionPerformed(final ActionEvent e) {
 				cliente.getPaquetePersonaje().useBonus(0, 0, puntosAsignados[0], puntosAsignados[1],
 						puntosAsignados[2]);
 				cliente.getPaquetePersonaje().removerBonus();
@@ -225,10 +231,10 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonConfirm);
 
 		final JButton buttonCancel = new JButton("Cancelar");
-		ImageIcon icono_c = new ImageIcon("recursos//botonCancelar.png");
-		buttonCancel.setIcon(icono_c);
+		ImageIcon iconoc = new ImageIcon("recursos//botonCancelar.png");
+		buttonCancel.setIcon(iconoc);
 		buttonCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				Pantalla.menuAsignar = null;
 				dispose();
 			}
@@ -237,14 +243,14 @@ public class MenuAsignarSkills extends JFrame {
 		contentPane.add(buttonCancel);
 
 		int ubicacionYBtnMinus = 34;
-		ImageIcon icono_1 = new ImageIcon("recursos//botonMenoss.png");
-		ImageIcon icono_2 = new ImageIcon("recursos//botonMass.png");
+		ImageIcon icono1 = new ImageIcon("recursos//botonMenoss.png");
+		ImageIcon icono2 = new ImageIcon("recursos//botonMass.png");
 
 		// FORMATEAR BOTONES
 		for (i = 0; i < CANTATRIBUTOS; i++) {
 
 			// FORMATEAR BOTON MINUS
-			buttonMinus[i].setIcon(icono_1);
+			buttonMinus[i].setIcon(icono1);
 			agregarEventoBotonMenos(i);
 			ubicacionYBtnMinus += 58;
 			buttonMinus[i].setBounds(12, ubicacionYBtnMinus, 34, 25);
@@ -252,7 +258,7 @@ public class MenuAsignarSkills extends JFrame {
 
 			// FORMATEAR BOTON MORE
 			agregarEventoBotonMas(i);
-			buttonMore[i].setIcon(icono_2);
+			buttonMore[i].setIcon(icono2);
 			buttonMore[i].setBounds(118, ubicacionYBtnMinus, 34, 25);
 			contentPane.add(buttonMore[i]);
 
@@ -277,7 +283,13 @@ public class MenuAsignarSkills extends JFrame {
 
 	}
 
-	private void formatearPuntajeAtributos(JLabel label, int ubicacionLabelAtributos, int i) {
+	/**
+	 * Formatea los puntos de los atributos.
+	 * @param label label del atributo que se quiera formatear.
+	 * @param ubicacionLabelAtributos ubicacion relativa del label.
+	 * @param i que indica que tipo de atributo es.
+	 */
+	private void formatearPuntajeAtributos(final JLabel label, final int ubicacionLabelAtributos, final int i) {
 		label.setForeground(Color.WHITE);
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setBounds(50, ubicacionLabelAtributos, 56, 16);
@@ -286,23 +298,22 @@ public class MenuAsignarSkills extends JFrame {
 	}
 
 	/**
-	 * Agrega el evento Click de un botón Minus
-	 * 
-	 * @param i
-	 *            indice del botón Minus
+	 * Agrega el evento Click de un botón Minus.
+	 * @param i indice del botón Minus.
 	 */
-	private void agregarEventoBotonMenos(int i) {
+	private void agregarEventoBotonMenos(final int i) {
 		buttonMinus[i].addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				puntosAsignados[i]--;
 				puntosNoAsignados++;
 				labelPuntos.setText(String.valueOf(puntosNoAsignados));
 				labelPuntosAtributos[i].setText(String.valueOf(puntosTotales[i] + puntosAsignados[i]));
 
-				if (puntosAsignados[0] != 0 || puntosAsignados[1] != 0 || puntosAsignados[2] != 0)
+				if (puntosAsignados[0] != 0 || puntosAsignados[1] != 0 || puntosAsignados[2] != 0) {
 					buttonConfirm.setEnabled(true);
-				else
+				} else {
 					buttonConfirm.setEnabled(false);
+				}
 
 				// DESHABILITAR BOTONES MINUS CUANDO LA CANTIDAD DE PUNTOS NOASIGNADOS SEA IGUAL
 				// A LA CANTIDAD DE PUNTOS A ASIGNAR POR NIVEL
@@ -312,7 +323,7 @@ public class MenuAsignarSkills extends JFrame {
 					buttonMinus[2].setEnabled(false);
 				} else {
 					if ((puntosTotales[i] + puntosAsignados[i]) == puntosLimiteMinimo[i]) {
-					buttonMinus[i].setEnabled(false);
+						buttonMinus[i].setEnabled(false);
 					}
 				}
 
@@ -332,9 +343,9 @@ public class MenuAsignarSkills extends JFrame {
 	 * @param i
 	 *            indice del botón More
 	 */
-	private void agregarEventoBotonMas(int i) {
+	private void agregarEventoBotonMas(final int i) {
 		buttonMore[i].addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				puntosAsignados[i]++;
 				puntosNoAsignados--;
 				labelPuntos.setText(String.valueOf(puntosNoAsignados));
@@ -342,8 +353,7 @@ public class MenuAsignarSkills extends JFrame {
 
 				if (puntosAsignados[0] != 0 || puntosAsignados[1] != 0 || puntosAsignados[2] != 0) {
 					buttonConfirm.setEnabled(true);
-				}
-				else{
+				} else {
 					buttonConfirm.setEnabled(false);
 				}
 				if ((puntosTotales[i] + puntosAsignados[i]) == 200) {

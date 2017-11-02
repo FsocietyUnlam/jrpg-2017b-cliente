@@ -9,85 +9,135 @@ import dominio.Personaje;
 import juego.Pantalla;
 import recursos.Recursos;
 
+/**
+ * Clase del menu de la batalla.
+ * @author Lucas
+ *
+ */
 public class MenuBatalla {
 
-	private static final int x = 100;
-	private static final int y = 380;
-	private static final int anchoBoton = 40;
-	private static final int[][] botones = {{x + 48, y + 72},
-			{x + 48, y + 146},
-			{x + 221, y + 72},
-			{x + 221, y + 146},
-			{x + 394, y + 72},
-			{x + 394, y + 146}};
+	/**
+	 * Atributo estático del tipo entero para indicar el eje x.
+	 */
+	private static final int X = 100;
+	/**
+	 * Atributo estático del tipo entero para indicar el eje y.
+	 */
+	private static final int Y = 380;
+	/**
+	 * Atributo estático del tipo entero para indicar el ancho del boton.
+	 */
+	private static final int ANCHOBOTON = 40;
+	/**
+	 * Atributo estático del tipo matriz de enteros.
+	 */
+	private static final int[][] BOTONES = {{X + 48, Y + 72},
+			{X + 48, Y + 146},
+			{X + 221, Y + 72},
+			{X + 221, Y + 146},
+			{X + 394, Y + 72},
+			{X + 394, Y + 146}};
+	/**
+	 * Atributo privado del tipo booleano.
+	 */
 	private boolean habilitado;
+	/**
+	 * Atributo privado del tipo personaje.
+	 */
 	private Personaje personaje;
 
-	public MenuBatalla(boolean habilitado, Personaje personaje) {
+	/**
+	 * Constructor del menu de la batalla.
+	 * @param habilitado es del tipo boolean
+	 * @param personaje es del tipo personaje
+	 */
+	public MenuBatalla(final boolean habilitado, final Personaje personaje) {
 		this.habilitado = habilitado;
 		this.personaje = personaje;
 	}
 
-	public void graficar(Graphics g) {
+	/**
+	 * Metodo para graficar.
+	 * @param g del tipo graphics.
+	 */
+	public void graficar(final Graphics g) {
 
-		if (habilitado)
-			g.drawImage(Recursos.menuBatalla, x, y, null);
-		else
-			g.drawImage(Recursos.menuBatallaDeshabilitado, x, y, null);
+		if (habilitado) {
+			g.drawImage(Recursos.menuBatalla, X, Y, null);
+		} else {
+			g.drawImage(Recursos.menuBatallaDeshabilitado, X, Y, null);
+		}
 
 		// Dibujo los boones
-		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[0]), botones[0][0], botones[0][1],
-				anchoBoton, anchoBoton, null);
-		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[1]), botones[1][0], botones[1][1],
-				anchoBoton, anchoBoton, null);
-		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[0]), botones[2][0], botones[2][1],
-				anchoBoton, anchoBoton, null);
-		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[1]), botones[3][0], botones[3][1],
-				anchoBoton, anchoBoton, null);
-		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[2]), botones[4][0], botones[4][1],
-				anchoBoton, anchoBoton, null);
-		g.drawImage(Recursos.habilidades.get("Ser Energizado"), botones[5][0], botones[5][1], anchoBoton,
-				anchoBoton, null);
+		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[0]), BOTONES[0][0], BOTONES[0][1],
+				ANCHOBOTON, ANCHOBOTON, null);
+		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesRaza()[1]), BOTONES[1][0], BOTONES[1][1],
+				ANCHOBOTON, ANCHOBOTON, null);
+		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[0]), BOTONES[2][0], BOTONES[2][1],
+				ANCHOBOTON, ANCHOBOTON, null);
+		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[1]), BOTONES[3][0], BOTONES[3][1],
+				ANCHOBOTON, ANCHOBOTON, null);
+		g.drawImage(Recursos.habilidades.get(personaje.getHabilidadesCasta()[2]), BOTONES[4][0], BOTONES[4][1],
+				ANCHOBOTON, ANCHOBOTON, null);
+		g.drawImage(Recursos.habilidades.get("Ser Energizado"), BOTONES[5][0], BOTONES[5][1], ANCHOBOTON,
+				ANCHOBOTON, null);
 
 		// Dibujo las leyendas
 		g.setFont(new Font("Book Antiqua", 1, 14));
-		g.drawString(personaje.getHabilidadesRaza()[0], x + 95, y + 94);
-		g.drawString(personaje.getHabilidadesRaza()[1], x + 95, y + 168);
-		g.drawString(personaje.getHabilidadesCasta()[0], x + 268, y + 94);
-		g.drawString(personaje.getHabilidadesCasta()[1], x + 268, y + 168);
-		g.drawString(personaje.getHabilidadesCasta()[2], x + 442, y + 94);
-		g.drawString("Ser energizado", x + 442, y + 168);
+		g.drawString(personaje.getHabilidadesRaza()[0], X + 95, Y + 94);
+		g.drawString(personaje.getHabilidadesRaza()[1], X + 95, Y + 168);
+		g.drawString(personaje.getHabilidadesCasta()[0], X + 268, Y + 94);
+		g.drawString(personaje.getHabilidadesCasta()[1], X + 268, Y + 168);
+		g.drawString(personaje.getHabilidadesCasta()[2], X + 442, Y + 94);
+		g.drawString("Ser energizado", X + 442, Y + 168);
 
 		// Dibujo el turno de quien es
 		g.setColor(Color.WHITE);
-		if (habilitado)
-			Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.menuBatalla.getWidth(), 20),
-					"Mi Turno");
-		else
-			Pantalla.centerString(g, new Rectangle(x, y + 5, Recursos.menuBatalla.getWidth(), 20),
+		if (habilitado) {
+			Pantalla.centerString(g, new Rectangle(X, Y + 5, Recursos.menuBatalla.getWidth(), 20), "Mi Turno");
+		} else {
+			Pantalla.centerString(g, new Rectangle(X, Y + 5, Recursos.menuBatalla.getWidth(), 20),
 					"Turno Rival");
-
+		}
 	}
 
-	public int getBotonClickeado(int mouseX, int mouseY) {
-		if (!habilitado)
+	/**
+	 * Metodo para obtener el click.
+	 * @param mouseX del tipo entero para indicar el eje x.
+	 * @param mouseY del tipo entero para indicar el eje y.
+	 * @return del tipo entero.
+	 */
+	public int getBotonClickeado(final int mouseX, final int mouseY) {
+		if (!habilitado) {
 			return 0;
-		for (int i = 0; i < botones.length; i++) {
-			if (mouseX >= botones[i][0] && mouseX <= botones[i][0] + anchoBoton && mouseY >= botones[i][1]
-					&& mouseY <= botones[i][1] + anchoBoton)
+			}
+		for (int i = 0; i < BOTONES.length; i++) {
+			if (mouseX >= BOTONES[i][0] && mouseX <= BOTONES[i][0] + ANCHOBOTON && mouseY >= BOTONES[i][1]
+					&& mouseY <= BOTONES[i][1] + ANCHOBOTON) {
 				return i + 1;
+				}
 		}
 		return 0;
 	}
 
-	public boolean clickEnMenu(int mouseX, int mouseY) {
-		if (mouseX >= x && mouseX <= x + Recursos.menuBatalla.getWidth() && mouseY >= y
-				&& mouseY <= y + Recursos.menuBatalla.getHeight())
+	/**
+	 * Metodo para el click en el menu.
+	 * @param mouseX del tipo entero para indicar el eje x
+	 * @param mouseY del tipo entero para indicar el eje y
+	 * @return retorna un boolean para indicar si esta habilitado o no.
+	 */
+	public boolean clickEnMenu(final int mouseX, final int mouseY) {
+		if (mouseX >= X && mouseX <= X + Recursos.menuBatalla.getWidth() && mouseY >= Y
+				&& mouseY <= Y + Recursos.menuBatalla.getHeight()) {
 			return habilitado;
+			}
 		return false;
 	}
-
-	public void setHabilitado(boolean b) {
+/**
+ * Metodo para setear si está habilitado o no.
+ * @param b del tipo boolean
+ */
+	public void setHabilitado(final boolean b) {
 		habilitado = b;
 	}
 }

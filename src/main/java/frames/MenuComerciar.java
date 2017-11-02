@@ -33,23 +33,71 @@ import cliente.Cliente;
 import dominio.Item;
 import mensajeria.Comando;
 
+/**
+ * Menu comerciar.
+ * @author Lucas
+ *
+ */
 public class MenuComerciar extends JFrame {
 
+	/**
+	* serialVerion.
+	*/
+	private static final long serialVersionUID = 1L;
+	/**
+	 * contenedor.
+	 */
 	private JPanel contentPane;
+	/**
+	 * items.
+	 */
 	private DefaultListModel<String> misItems = new DefaultListModel<String>();
+	/**
+	 * dar.
+	 */
 	private DefaultListModel<String> dar = new DefaultListModel<String>();
+	/**
+	 * lista modelo por defecto.
+	 */
 	private DefaultListModel<String> obtener = new DefaultListModel<String>();
+	/**
+	 * cantidades que están listos.
+	 */
 	private int cantListos = 0;
+	/**
+	 * Label con la cantidad lista.
+	 */
 	private JLabel cantListo;
+	/**
+	 * atributo del tipo Item.
+	 */
 	private Item item1;
+	/**
+	 * contador.
+	 */
 	private int count = 0;
+	/**
+	 * nuevo GSON.
+	 */
 	private final Gson gson = new Gson();
+	/**
+	 * tamanio de los items.
+	 */
 	private int sizeItems;
+	/**
+	 * Checkbox de listo.
+	 */
 	private JCheckBox chckbxListo;
+	/**
+	 * Label de la leyenda.
+	 */
 	private JLabel leyenda;
 
 	/**
+	 *
 	 * Create the frame.
+	 * @param cliente
+	 *            Del tipo cliente.
 	 */
 	public MenuComerciar(final Cliente cliente) {
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -65,7 +113,7 @@ public class MenuComerciar extends JFrame {
 
 		addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosing(WindowEvent e) {
+			public void windowClosing(final WindowEvent e) {
 				cliente.setM1(null);
 				dispose();
 			}
@@ -82,7 +130,7 @@ public class MenuComerciar extends JFrame {
 		final JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setIcon(new ImageIcon("recursos//volver.png"));
 		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				cliente.setM1(null);
 				dispose();
 			}
@@ -250,7 +298,7 @@ public class MenuComerciar extends JFrame {
 		final JButton btnAgregar = new JButton("-->");
 		btnAgregar.setIcon(new ImageIcon("recursos//flechaDer.png"));
 		btnAgregar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				if (listMisItems.getSelectedValue() != null) {
 					dar.addElement(listMisItems.getSelectedValue());
 					if (obtener.size() != 0) {
@@ -292,7 +340,7 @@ public class MenuComerciar extends JFrame {
 		final JButton btnSacar = new JButton("<--");
 		btnSacar.setIcon(new ImageIcon("recursos//flechaIzq.png"));
 		btnSacar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(final ActionEvent arg0) {
 				if (listADar.getSelectedValue() != null) {
 					misItems.addElement(listADar.getSelectedValue());
 					for (Item item : cliente.getPaquetePersonaje().getItems()) {
@@ -338,7 +386,7 @@ public class MenuComerciar extends JFrame {
 		// List Listener para cargar stats del item mio clickeado
 		listMisItems.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(final MouseEvent arg0) {
 				if (arg0.getClickCount() == 1) {
 					if (listMisItems.getSelectedValue() != null) {
 						for (Item item : cliente.getPaquetePersonaje().getItems()) {
@@ -358,10 +406,10 @@ public class MenuComerciar extends JFrame {
 		// List Listener para cargar stats del item del enemigo clickeado
 		listAObtener.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mouseClicked(MouseEvent arg0) {
+			public void mouseClicked(final MouseEvent arg0) {
 				if (arg0.getClickCount() == 1) {
 					if (obtener.size() != 0) {
-						// cambiar la variable del for each a la lista que va a venir del otro pj
+// cambiar la variable del for each a la lista que va a venir del otro pj
 						for (Item item : cliente.getPaqueteComercio().getItemsAObtener()) {
 							if (listAObtener.getSelectedValue().equals(item.getNombre())) {
 								saludEnemy.setText("+ " + item.getBonusSalud());
@@ -396,7 +444,7 @@ public class MenuComerciar extends JFrame {
 		contentPane.add(cantListo);
 
 		chckbxListo.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent arg0) {
+			public void itemStateChanged(final ItemEvent arg0) {
 				if (chckbxListo.isSelected()) {
 					// Si ya la persona con la que voy a comerciar esta en LISTO
 					if (cantListos == 1) {
@@ -470,38 +518,74 @@ public class MenuComerciar extends JFrame {
 		contentPane.add(background);
 	}
 
+	/**
+	 * get de listos.
+	 * @return un entero
+	 */
 	public int getCantListos() {
 		return cantListos;
 	}
 
-	public void setCantListos(int cantListos) {
+	/**
+	 * set de listos.
+	 * @param cantListos un entero
+	 */
+	public void setCantListos(final int cantListos) {
 		this.cantListos = cantListos;
 	}
 
+	/**
+	 * get del label listo.
+	 * @return un label
+	 */
 	public JLabel getCantListo() {
 		return cantListo;
 	}
 
-	public void setObtener(DefaultListModel<String> obtener) {
+	/**
+	 * set del label listo.
+	 * @param obtener un listmodel
+	 */
+	public void setObtener(final DefaultListModel<String> obtener) {
 		this.obtener = obtener;
 	}
 
+	/**
+	 * get de obtener.
+	 * @return un listmodel
+	 */
 	public DefaultListModel<String> getObtener() {
 		return obtener;
 	}
 
+	/**
+	 * get de dar.
+	 * @return es un listmodel
+	 */
 	public DefaultListModel<String> getDar() {
 		return dar;
 	}
 
+	/**
+	 * get del tamanio del item.
+	 * @return un entero.
+	 */
 	public int getSizeItems() {
 		return sizeItems;
 	}
 
+	/**
+	 * get del checkbox de listo.
+	 * @return un checkbox
+	 */
 	public JCheckBox getChckbxListo() {
 		return chckbxListo;
 	}
 
+	/**
+	 * get de la leyenda.
+	 * @return un label
+	 */
 	public JLabel getLeyenda() {
 		return leyenda;
 	}

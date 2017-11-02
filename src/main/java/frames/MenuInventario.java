@@ -16,13 +16,29 @@ import inventario.Inventario;
 import juego.Pantalla;
 import mensajeria.Comando;
 
+/**
+ * Clase para el menu de inventario.
+ * @author Lucas
+ *
+ */
 public class MenuInventario extends JFrame {
+	/**
+	 * El buen serial ID.
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * Boton para cancelar.
+	 */
 	private JButton cancelar = new JButton("Exit");
 
+	/**
+	 * Constructor del menu de inventario.
+	 * @param cliente es del tipo cliente
+	 */
 	public MenuInventario(final Cliente cliente) {
 		cancelar.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(final ActionEvent e) {
 				try {
 					Gson gson = new Gson();
 					cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARINVENTARIO);

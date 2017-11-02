@@ -23,10 +23,24 @@ import javax.swing.JTextField;
 
 import cliente.Cliente;
 import mensajeria.Comando;
-
+/**
+ * Clase del menu de registro.
+ * @author Lucas
+ *
+ */
 public class MenuRegistro extends JFrame {
 
+	/**
+	 * El buen serial ID.
+	 */
+	private static final long serialVersionUID = 1L;
+	/**
+	 * TextField para el usuario.
+	 */
 	private JTextField txtUsuario;
+	/**
+	 * PasswordField para mantener la confidencialidad del usuario.
+	 */
 	private JPasswordField pwPassword;
 
 	/**
