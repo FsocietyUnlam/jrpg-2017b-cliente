@@ -2,11 +2,14 @@ package comandos;
 
 import mensajeria.Comando;
 
+/**
+ * Clase InicioSesionSet.
+ */
 public class InicioSesionSet extends ComandosCliente {
 
-	@Override
-	public void ejecutar() {
-		cliente.getPaqueteUsuario().setComando(Comando.INICIOSESION);
-	}
+    @Override
+    public final void ejecutar() {
+        getCliente().getPaqueteUsuario().setComando(Comando.INICIOSESION);
+    }
 
 }

@@ -1,13 +1,15 @@
 package comandos;
 
 import mensajeria.Comando;
-
+/**
+ * Clase SalirSet.
+ */
 public class SalirSet extends ComandosCliente {
 
-	@Override
-	public void ejecutar() {
-		cliente.getPaqueteUsuario().setIp(cliente.getMiIp());
-		cliente.getPaqueteUsuario().setComando(Comando.SALIR);
-	}
+    @Override
+    public final void ejecutar() {
+        getCliente().getPaqueteUsuario().setIp(getCliente().getMiIp());
+        getCliente().getPaqueteUsuario().setComando(Comando.SALIR);
+    }
 
 }
