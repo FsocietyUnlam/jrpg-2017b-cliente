@@ -3,10 +3,27 @@ package comandos;
 import juego.Juego;
 import mensajeria.Comando;
 
+/**
+ * Clase abstracta ComandosEscucha.
+ */
 public abstract class ComandosEscucha extends Comando {
-	protected Juego juego;
-	public void setJuego(Juego juego) {
-		this.juego = juego;
-	}
+    /**
+     * juego.
+     */
+    private Juego juego;
+    /**
+     * Setter de juego.
+     * @param juego envia el juego
+     */
+    public void setJuego(final Juego juego) {
+        this.juego = juego;
+    }
+    /**
+     * Getter de juego.
+     * @return juego
+     */
+    public Juego getJuego() {
+        return juego;
+    }
 
 }
