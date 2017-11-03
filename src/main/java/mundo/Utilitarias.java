@@ -3,13 +3,15 @@ package mundo;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
 import javax.swing.JOptionPane;
 
-
 public class Utilitarias {
-
-	public static String archivoAString(String path) {
+	/**
+	 * Transforma un archivo a string.
+	 * @param path .
+	 * @return un string.
+	 */
+	public static String archivoAString(final String path) {
 		StringBuilder builder = new StringBuilder();
 
 		try {
@@ -28,7 +30,12 @@ public class Utilitarias {
 		return builder.toString();
 	}
 
-	public static int parseInt(String numero) {
+	/**
+	 * Parsea un entero.
+	 * @param numero .
+	 * @return un entero.
+	 */
+	public static int parseInt(final String numero) {
 		try {
 			return Integer.parseInt(numero);
 		} catch (NumberFormatException e) {

@@ -28,79 +28,227 @@ import mundo.Mundo;
 import mundo.Nodo;
 import recursos.Recursos;
 
+import variables.Constantes;
+
 /**
- * Clase Entidad
+ * Clase Entidad.
  */
 
 public class Entidad {
+	/**
+	 * the juego.
+	 */
+	private Juego juego;
 
-	Juego juego;
-
-	// Tamaño de la entidad
+	/**
+	 * the ancho.
+	 */
 	private int ancho;
+	/**
+	 * the alto.
+	 */
 	private int alto;
 
 	// Posiciones
+	/**
+	 * the x.
+	 */
 	private float x;
+	/**
+	 * the y.
+	 */
 	private float y;
+	/**
+	 * the dx.
+	 */
 	private float dx;
+	/**
+	 * the dy.
+	 */
 	private float dy;
+	/**
+	 * the xInicio.
+	 */
 	private float xInicio;
+	/**
+	 * the yInicio.
+	 */
 	private float yInicio;
+	/**
+	 * the xFinal.
+	 */
 	private float xFinal;
+	/**
+	 * theyFinal.
+	 */
 	private float yFinal;
+	/**
+	 * the xOffset.
+	 */
 	private int xOffset;
+	/**
+	 * the yOffset.
+	 */
 	private int yOffset;
+	/**
+	 * the drawX.
+	 */
 	private int drawX;
+	/**
+	 * the drawY.
+	 */
 	private int drawY;
+	/**
+	 * the posMouseRecorrido.
+	 */
 	private int[] posMouseRecorrido;
+	/**
+	 * the posMouse.
+	 */
 	private int[] posMouse;
+	/**
+	 * the tile.
+	 */
 	private int[] tile;
 
 	// Movimiento Actual
-	private static final int horizontalDer = 4;
-	private static final int horizontalIzq = 0;
-	private static final int verticalSup = 2;
-	private static final int verticalInf = 6;
-	private static final int diagonalInfIzq = 7;
-	private static final int diagonalInfDer = 5;
-	private static final int diagonalSupDer = 3;
-	private static final int diagonalSupIzq = 1;
+	/**
+	 * the HORIZANTAL_DER.
+	 */
+	private static final int HORIZONTAL_DER = 4;
+	/**
+	 * the HORIZONTAL_IZQ.
+	 */
+	private static final int HORIZONTAL_IZQ = 0;
+	/**
+	 * the VERTICAL_SUP.
+	 */
+	private static final int VERTICAL_SUP = 2;
+	/**
+	 * the VERTICAL_SUP.
+	 */
+	private static final int VERTICAL_INF = 6;
+	/**
+	 * the DIAGONAL_INF_IZQ.
+	 */
+	private static final int DIAGONAL_INF_IZQ = 7;
+	/**
+	 * the DIAGONAL_INF_DER.
+	 */
+	private static final int DIAGONAL_INF_DER = 5;
+	/**
+	 * the DIAGONAL_SUP_DER.
+	 */
+	private static final int DIAGONAL_SUP_DER = 3;
+	/**
+	 * the DIAGONAL_SUP_IZQ.
+	 */
+	private static final int DIAGONAL_SUP_IZQ = 1;
+	/**
+	 * the movimientoHacia.
+	 */
 	private int movimientoHacia = 6;
+	/**
+	 * the enMovimiento.
+	 */
 	private boolean enMovimiento;
 
 	// Animaciones
+	/**
+	 * the moverIzq.
+	 */
 	private final Animacion moverIzq;
+	/**
+	 * the moverArribaIzq.
+	 */
 	private final Animacion moverArribaIzq;
+	/**
+	 * the moverArriba.
+	 */
 	private final Animacion moverArriba;
+	/**
+	 * the moverArribaDer.
+	 */
 	private final Animacion moverArribaDer;
+	/**
+	 * the moverDer.
+	 */
 	private final Animacion moverDer;
+	/**
+	 * the moverAbajoDer.
+	 */
 	private final Animacion moverAbajoDer;
+	/**
+	 * the moverAbajo.
+	 */
 	private final Animacion moverAbajo;
+	/**
+	 * the moverAbajoIzq.
+	 */
 	private final Animacion moverAbajoIzq;
-
+	/**
+	 * the Gson.
+	 */
 	private final Gson gson = new Gson();
+	/**
+	 * the intervaloEnvio.
+	 */
 	private int intervaloEnvio = 0;
 
 	// pila de movimiento
+	/**
+	 * the pilaMovimiento.
+	 */
 	private PilaDeTiles pilaMovimiento;
+	/**
+	 * the tileActual.
+	 */
 	private int[] tileActual;
+	/**
+	 * the tileFinal.
+	 */
 	private int[] tileFinal;
+	/**
+	 * the tileMoverme.
+	 */
 	private int[] tileMoverme;
-
+	/**
+	 * the mundo.
+	 */
 	private Mundo mundo;
+	/**
+	 * the nombre.
+	 */
 	private String nombre;
+	/**
+	 * the tilePersonajes.
+	 */
 	private int[] tilePersonajes;
+	/**
+	 * the idEnemigo.
+	 */
 	private int idEnemigo;
 
 	// Ubicacion para abrir comerciar.
+	/**
+	 * the idEnemigo.
+	 */
 	private float xComercio;
+	/**
+	 * the yComercio.
+	 */
 	private float yComercio;
+	/**
+	 * the comercio.
+	 */
 	private float[] comercio;
+	/**
+	 * the movimientos.
+	 */
 	private HashMap<Integer, Animacion> movimientos = new HashMap<Integer, Animacion>();
 
 	/**
-	 * Constructor de la clase Entidad
+	 * Constructor de la clase Entidad.
 	 * 
 	 * @param juego
 	 *            juego con el que se instancia Entidad
@@ -131,19 +279,19 @@ public class Entidad {
 		this.mundo = mundo;
 		xOffset = ancho / 2;
 		yOffset = alto / 2;
-		x = (int) (spawnX / 64) * 64;
-		y = (int) (spawnY / 32) * 32;
+		x = (int) (spawnX / Constantes.SPAWNX_X) * Constantes.SPAWNY_Y;
+		y = (int) (spawnY / Constantes.SPAWNY_Y) * Constantes.SPAWNY_Y;
 
-		moverIzq = new Animacion(velAnimacion, animaciones.get(0));
-		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(1));
-		moverArriba = new Animacion(velAnimacion, animaciones.get(2));
-		moverArribaDer = new Animacion(velAnimacion, animaciones.get(3));
-		moverDer = new Animacion(velAnimacion, animaciones.get(4));
-		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(5));
-		moverAbajo = new Animacion(velAnimacion, animaciones.get(6));
-		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(7));
+		moverIzq = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_0));
+		moverArribaIzq = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_1));
+		moverArriba = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_2));
+		moverArribaDer = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_3));
+		moverDer = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_4));
+		moverAbajoDer = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_5));
+		moverAbajo = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_6));
+		moverAbajoIzq = new Animacion(velAnimacion, animaciones.get(Constantes.ANIMACION_POSICION_7));
 
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < Constantes.I_MAXIMO_ANIMACIONES; i++) {
 			movimientos.put(i, new Animacion(velAnimacion, animaciones.get(i)));
 		}
 
@@ -155,7 +303,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Actualiza el personaje
+	 * Actualiza el personaje.
 	 */
 	public void actualizar() {
 
@@ -169,7 +317,7 @@ public class Entidad {
 			// moverAbajo.actualizar();
 			// moverAbajoIzq.actualizar();
 
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < Constantes.I_MAXIMO_ANIMACIONES; i++) {
 				movimientos.get(i).actualizar();
 			}
 		} else {
@@ -182,7 +330,7 @@ public class Entidad {
 			// moverAbajo.reset();
 			// moverAbajoIzq.reset();
 
-			for (int i = 0; i < 8; i++) {
+			for (int i = 0; i < Constantes.I_MAXIMO_ANIMACIONES; i++) {
 				movimientos.get(i).reset();
 			}
 		}
@@ -194,29 +342,32 @@ public class Entidad {
 	}
 
 	/**
-	 * Devuelve la entrada
+	 * Devuelve la entrada.
 	 */
 	public void getEntrada() {
 		posMouseRecorrido = juego.getHandlerMouse().getPosMouseRecorrido();
 		posMouse = juego.getHandlerMouse().getPosMouse();
-		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 738 && posMouse[0] <= 797 && posMouse[1] >= 545
-				&& posMouse[1] <= 597) {
+		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= Constantes.POSICION_MOUSE_738
+				&& posMouse[0] <= Constantes.POSICION_MOUSE_797 && posMouse[1] >= Constantes.POSICION_MOUSE_545
+				&& posMouse[1] <= Constantes.POSICION_MOUSE_597) {
 			if (Pantalla.menuInventario == null) {
 				Pantalla.menuInventario = new MenuInventario(juego.getCliente());
 				Pantalla.menuInventario.setVisible(true);
 			}
 			juego.getHandlerMouse().setNuevoClick(false);
 		}
-		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 562
-				&& posMouse[1] <= 597) {
+		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= Constantes.POSICION_MOUSE_3
+				&& posMouse[0] <= Constantes.POSICION_MOUSE_105 && posMouse[1] >= Constantes.POSICION_MOUSE_562
+				&& posMouse[1] <= Constantes.POSICION_MOUSE_597) {
 			if (Pantalla.menuEscp == null) {
 				Pantalla.menuEscp = new MenuEscape(juego.getCliente());
 				Pantalla.menuEscp.setVisible(true);
 			}
 			juego.getHandlerMouse().setNuevoClick(false);
 		}
-		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= 3 && posMouse[0] <= 105 && posMouse[1] >= 524
-				&& posMouse[1] <= 559) {
+		if (juego.getHandlerMouse().getNuevoClick() && posMouse[0] >= Constantes.POSICION_MOUSE_3
+				&& posMouse[0] <= Constantes.POSICION_MOUSE_105 && posMouse[1] >= Constantes.POSICION_MOUSE_524
+				&& posMouse[1] <= Constantes.POSICION_MOUSE_559) {
 			if (Pantalla.ventContac == null) {
 				Pantalla.ventContac = new VentanaContactos(juego);
 				Pantalla.ventContac.setVisible(true);
@@ -229,7 +380,8 @@ public class Entidad {
 
 				if (juego.getEstadoJuego().getMenuEnemigo().clickEnMenu(posMouse[0], posMouse[1])) {
 					if (juego.getEstadoJuego().getMenuEnemigo().clickEnBoton(posMouse[0], posMouse[1])) {
-						// Pregunto si menuBatallar o menuComerciar, sino no me interesa hacer esto
+						// Pregunto si menuBatallar o menuComerciar, sino no me
+						// interesa hacer esto
 						if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUBATALLAR
 								|| juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUCOMERCIAR) {
 							// Guardo las poss con el que quiero comerciar
@@ -239,9 +391,12 @@ public class Entidad {
 						}
 						// pregunto si el menu emergente es de tipo batalla
 						if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUBATALLAR) {
-							// ME FIJO SI CON EL QUE QUIERO BATALLAR ESTA EN LA ZONA DE COMERCIO
-							if (!((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
-									&& (int) comercio[1] <= 29)) {
+							// ME FIJO SI CON EL QUE QUIERO BATALLAR ESTA EN LA
+							// ZONA DE COMERCIO
+							if (!((int) comercio[0] >= Constantes.GET_ENTRADA_COMERCIO_44
+									&& (int) comercio[0] <= Constantes.GET_ENTRADA_COMERCIO_71
+									&& (int) comercio[1] >= Constantes.GET_ENTRADA_COMERCIO_0
+									&& (int) comercio[1] <= Constantes.GET_ENTRADA_COMERCIO_29)) {
 								juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 								PaqueteBatalla pBatalla = new PaqueteBatalla();
 
@@ -262,8 +417,10 @@ public class Entidad {
 						} else {
 							// PREGUNTO SI EL MENU EMERGENTE ES DE TIPO COMERCIO
 							if (juego.getEstadoJuego().getTipoSolicitud() == MenuInfoPersonaje.MENUCOMERCIAR) {
-								if ((int) comercio[0] >= 44 && (int) comercio[0] <= 71 && (int) comercio[1] >= 0
-										&& (int) comercio[1] <= 29) {
+								if ((int) comercio[0] >= Constantes.GET_ENTRADA_COMERCIO_44
+										&& (int) comercio[0] <= Constantes.GET_ENTRADA_COMERCIO_71
+										&& (int) comercio[1] >= Constantes.GET_ENTRADA_COMERCIO_0
+										&& (int) comercio[1] <= Constantes.GET_ENTRADA_COMERCIO_29) {
 									if (juego.getCliente().getM1() == null) {
 										juego.getCliente().setPaqueteComercio(new PaqueteComerciar());
 										juego.getCliente().getPaqueteComercio().setId(juego.getPersonaje().getId());
@@ -277,32 +434,26 @@ public class Entidad {
 													"Fallo la conexión " + "con el servidor");
 										}
 									} else {
-										JOptionPane
-										.showMessageDialog(null, "Ya te encuentras comerciando!");
+										JOptionPane.showMessageDialog(null, "Ya te encuentras comerciando!");
 									}
 								} else {
 									JOptionPane.showMessageDialog(null,
-									"El otro usuario no se encuentra dentro de la zona de comercio");
+											"El otro usuario no se encuentra dentro de la zona de comercio");
 								}
 							}
 						}
-						juego.getEstadoJuego()
-							.setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
+						juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 
-					} else if (juego.getEstadoJuego()
-							.getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
-						juego.getEstadoJuego()
-							.setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
+					} else if (juego.getEstadoJuego().getMenuEnemigo().clickEnCerrar(posMouse[0], posMouse[1])) {
+						juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 					}
 				} else {
-					juego.getEstadoJuego()
-						.setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
+					juego.getEstadoJuego().setHaySolicitud(false, null, MenuInfoPersonaje.MENUBATALLAR);
 				}
 			} else {
 				Iterator<Integer> it = juego.getUbicacionPersonajes().keySet().iterator();
 				int key;
-				int[] tileMoverme = Mundo
-						.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
+				int[] tileMoverme = Mundo.mouseATile(posMouse[0] + juego.getCamara().getxOffset() - xOffset,
 						posMouse[1] + juego.getCamara().getyOffset() - yOffset);
 				PaqueteMovimiento actual;
 
@@ -312,21 +463,26 @@ public class Entidad {
 					tilePersonajes = Mundo.mouseATile(actual.getPosX(), actual.getPosY());
 					if (actual != null && actual.getIdPersonaje() != juego.getPersonaje().getId()
 							&& juego.getPersonajesConectados().get(actual.getIdPersonaje()) != null
-							&& juego.getPersonajesConectados().get(actual.getIdPersonaje())
-									.getEstado() == Estado.estadoJuego) {
+							&& juego.getPersonajesConectados().get(actual.getIdPersonaje()).getEstado() == Estado
+									.getEstadoJuego()) {
 
 						if (tileMoverme[0] == tilePersonajes[0] && tileMoverme[1] == tilePersonajes[1]) {
 							idEnemigo = actual.getIdPersonaje();
 							float XY[] = Mundo.isoA2D(x, y);
 							// ESTA ESTE PARA NO MOVERME HASTA EL LUGAR.
-							if (XY[0] >= 44 && XY[0] <= 71 && XY[1] >= 0 && XY[1] <= 29) {
-								// SI ESTOY DENTRO DE LA ZONA DE COMERCIO SETEO QUE SE ABRA EL MENU
+							if (XY[0] >= Constantes.GET_ENTRADA_COMERCIO_44
+									&& XY[0] <= Constantes.GET_ENTRADA_COMERCIO_71
+									&& XY[1] >= Constantes.GET_ENTRADA_COMERCIO_0
+									&& XY[1] <= Constantes.GET_ENTRADA_COMERCIO_29) {
+								// SI ESTOY DENTRO DE LA ZONA DE COMERCIO SETEO
+								// QUE SE ABRA EL MENU
 								// DE COMERCIO
 								juego.getEstadoJuego().setHaySolicitud(true,
 										juego.getPersonajesConectados().get(idEnemigo),
 										MenuInfoPersonaje.MENUCOMERCIAR);
 							} else {
-								// SI ESTOY DENTRO DE LA ZONA DE BATALLA SETEO QUE SE ABRA EL MENU
+								// SI ESTOY DENTRO DE LA ZONA DE BATALLA SETEO
+								// QUE SE ABRA EL MENU
 								// DE BATALLA
 								juego.getEstadoJuego().setHaySolicitud(true,
 										juego.getPersonajesConectados().get(idEnemigo), MenuInfoPersonaje.MENUBATALLAR);
@@ -399,35 +555,35 @@ public class Entidad {
 			yFinal = Mundo.dosDaIso(tileFinal[0], tileFinal[1])[1];
 
 			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] - 1) {
-				movimientoHacia = verticalSup;
+				movimientoHacia = VERTICAL_SUP;
 			}
 			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] + 1) {
-				movimientoHacia = verticalInf;
+				movimientoHacia = VERTICAL_INF;
 			}
 			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1] + 1) {
-				movimientoHacia = horizontalIzq;
+				movimientoHacia = HORIZONTAL_IZQ;
 			}
 			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1] - 1) {
-				movimientoHacia = horizontalDer;
+				movimientoHacia = HORIZONTAL_DER;
 			}
 			if (tileFinal[0] == tileActual[0] - 1 && tileFinal[1] == tileActual[1]) {
-				movimientoHacia = diagonalSupIzq;
+				movimientoHacia = DIAGONAL_SUP_IZQ;
 			}
 			if (tileFinal[0] == tileActual[0] + 1 && tileFinal[1] == tileActual[1]) {
-				movimientoHacia = diagonalInfDer;
+				movimientoHacia = DIAGONAL_INF_DER;
 			}
 			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] - 1) {
-				movimientoHacia = diagonalSupDer;
+				movimientoHacia = DIAGONAL_SUP_DER;
 			}
 			if (tileFinal[0] == tileActual[0] && tileFinal[1] == tileActual[1] + 1) {
-				movimientoHacia = diagonalInfIzq;
+				movimientoHacia = DIAGONAL_INF_IZQ;
 			}
 			enMovimiento = true;
 		}
 	}
 
 	/**
-	 * Mueve el personaje
+	 * Mueve el personaje.
 	 */
 	public void mover() {
 
@@ -436,26 +592,26 @@ public class Entidad {
 
 		double paso = 1;
 
-		if (enMovimiento && !(x == xFinal && y == yFinal - 32)) {
+		if (enMovimiento && !(x == xFinal && y == yFinal - Constantes.I_MOVIMIENTO_YFINAL)) {
 
-			if (movimientoHacia == verticalSup) {
+			if (movimientoHacia == VERTICAL_SUP) {
 				dy -= paso;
-			} else if (movimientoHacia == verticalInf) {
+			} else if (movimientoHacia == VERTICAL_INF) {
 				dy += paso;
-			} else if (movimientoHacia == horizontalDer) {
+			} else if (movimientoHacia == HORIZONTAL_DER) {
 				dx += paso;
-			} else if (movimientoHacia == horizontalIzq) {
+			} else if (movimientoHacia == HORIZONTAL_IZQ) {
 				dx -= paso;
-			} else if (movimientoHacia == diagonalInfDer) {
+			} else if (movimientoHacia == DIAGONAL_INF_DER) {
 				dx += paso;
 				dy += paso / 2;
-			} else if (movimientoHacia == diagonalInfIzq) {
+			} else if (movimientoHacia == DIAGONAL_INF_IZQ) {
 				dx -= paso;
 				dy += paso / 2;
-			} else if (movimientoHacia == diagonalSupDer) {
+			} else if (movimientoHacia == DIAGONAL_SUP_DER) {
 				dx += paso;
 				dy -= paso / 2;
-			} else if (movimientoHacia == diagonalSupIzq) {
+			} else if (movimientoHacia == DIAGONAL_SUP_IZQ) {
 				dx -= paso;
 				dy -= paso / 2;
 			}
@@ -470,51 +626,66 @@ public class Entidad {
 			}
 			intervaloEnvio++;
 
-			if (x == xFinal && y == yFinal - 32) {
+			if (x == xFinal && y == yFinal - Constantes.I_MOVIMIENTO_YFINAL) {
 				enMovimiento = false;
 			}
 		}
 	}
 
 	/**
-	 * Grafica el frame del personaje
+	 * Grafica el frame del personaje.
+	 * 
+	 * @param g
+	 *            .
 	 */
 	public void graficar(final Graphics g) {
 		drawX = (int) (x - juego.getCamara().getxOffset());
 		drawY = (int) (y - juego.getCamara().getyOffset());
-		g.drawImage(getFrameAnimacionActual(), drawX, drawY + 4, ancho, alto, null);
+		g.drawImage(getFrameAnimacionActual(), drawX, drawY + Constantes.GRAFICAS_DRAWY, ancho, alto, null);
 	}
 
 	/**
-	 * Grafica el nombre
+	 * Grafica el nombre.
+	 * 
+	 * @param g
+	 *            .
 	 */
 	public void graficarNombre(final Graphics g) {
 		g.setColor(Color.WHITE);
-		g.setFont(new Font("Book Antiqua", Font.BOLD, 15));
-		Pantalla.centerString(g, new java.awt.Rectangle(drawX + 32, drawY - 20, 0, 10), nombre);
+		g.setFont(new Font("Book Antiqua", Font.BOLD, Constantes.FONT_BOLD));
+		Pantalla.centerString(g,
+				new java.awt.Rectangle(drawX + Constantes.GRAFICAR_NOMBRES_DRAWX,
+						drawY - Constantes.GRAFICAR_NOMBRES_DRAWY_20, Constantes.GRAFICAR_NOMBRES_DRAWY_0,
+						Constantes.GRAFICAR_NOMBRES_DRAWY_10),
+				nombre);
 	}
 
 	/**
-	 * Obtiene el frameActual del personaje
+	 * Obtiene el frameActual del personaje.
+	 * 
+	 * @return BufferedImage de movimientos.
 	 */
 	private BufferedImage getFrameAnimacionActual() {
 		BufferedImage bi = movimientos.get(movimientoHacia).getFrameActual();
 
 		/*
-		 * if (movimientoHacia == horizontalIzq) { return moverIzq.getFrameActual(); }
-		 * else if (movimientoHacia == horizontalDer) { return
-		 * moverDer.getFrameActual(); } else if (movimientoHacia == verticalSup) {
-		 * return moverArriba.getFrameActual(); } else if (movimientoHacia ==
-		 * verticalInf) { return moverAbajo.getFrameActual(); } else if (movimientoHacia
-		 * == diagonalInfIzq) { return moverAbajoIzq.getFrameActual(); } else if
-		 * (movimientoHacia == diagonalInfDer) { return moverAbajoDer.getFrameActual();
-		 * } else if (movimientoHacia == diagonalSupIzq) { return
+		 * if (movimientoHacia == horizontalIzq) { return
+		 * moverIzq.getFrameActual(); } else if (movimientoHacia ==
+		 * horizontalDer) { return moverDer.getFrameActual(); } else if
+		 * (movimientoHacia == verticalSup) { return
+		 * moverArriba.getFrameActual(); } else if (movimientoHacia ==
+		 * verticalInf) { return moverAbajo.getFrameActual(); } else if
+		 * (movimientoHacia == diagonalInfIzq) { return
+		 * moverAbajoIzq.getFrameActual(); } else if (movimientoHacia ==
+		 * diagonalInfDer) { return moverAbajoDer.getFrameActual(); } else if
+		 * (movimientoHacia == diagonalSupIzq) { return
 		 * moverArribaIzq.getFrameActual(); } else if (movimientoHacia ==
 		 * diagonalSupDer) { return moverArribaDer.getFrameActual(); }
 		 */
 
-		if (bi == null)
-			bi = Recursos.orco.get(6)[0];
+		if (bi == null) {
+			bi = Recursos.orco.get(Constantes.RECURSOS_ARCO_6)[0];
+		}
 		return bi;
 
 		// return Recursos.orco.get(6)[0];
@@ -522,41 +693,43 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide la direccion donde va
+	 * Pide la direccion donde va.
 	 * 
-	 * @return devuelve el movimiento hacia donde va
+	 * @return devuelve el movimiento hacia donde va.
 	 */
 	private int getDireccion() {
 		return movimientoHacia;
 	}
 
 	/**
-	 * Obtiene el frame donde esta el personaje
+	 * Obtiene el frame donde esta el personaje.
+	 * 
+	 * @return .
 	 */
 	private int getFrame() {
 		int frame = movimientos.get(movimientoHacia).getFrame();
 
 		/*
-		 * if (movimientoHacia == horizontalIzq) { return moverIzq.getFrame(); } else if
-		 * (movimientoHacia == horizontalDer) { return moverDer.getFrame(); } else if
-		 * (movimientoHacia == verticalSup) { return moverArriba.getFrame(); } else if
-		 * (movimientoHacia == verticalInf) { return moverAbajo.getFrame(); } else if
-		 * (movimientoHacia == diagonalInfIzq) { return moverAbajoIzq.getFrame(); } else
-		 * if (movimientoHacia == diagonalInfDer) { return moverAbajoDer.getFrame(); }
-		 * else if (movimientoHacia == diagonalSupIzq) { return
-		 * moverArribaIzq.getFrame(); } else if (movimientoHacia == diagonalSupDer) {
-		 * return moverArribaDer.getFrame(); }
-		 * 
-		 * return 0;
+		 * if (movimientoHacia == horizontalIzq) { return moverIzq.getFrame(); }
+		 * else if (movimientoHacia == horizontalDer) { return
+		 * moverDer.getFrame(); } else if (movimientoHacia == verticalSup) {
+		 * return moverArriba.getFrame(); } else if (movimientoHacia ==
+		 * verticalInf) { return moverAbajo.getFrame(); } else if
+		 * (movimientoHacia == diagonalInfIzq) { return
+		 * moverAbajoIzq.getFrame(); } else if (movimientoHacia ==
+		 * diagonalInfDer) { return moverAbajoDer.getFrame(); } else if
+		 * (movimientoHacia == diagonalSupIzq) { return
+		 * moverArribaIzq.getFrame(); } else if (movimientoHacia ==
+		 * diagonalSupDer) { return moverArribaDer.getFrame(); } return 0;
 		 */
-		if (movimientoHacia < 0 && movimientoHacia > 7)
+		if (movimientoHacia < 0 && movimientoHacia > Constantes.MOVIMIENTOS_HACIA) {
 			frame = 0;
-
+		}
 		return frame;
 	}
 
 	/**
-	 * Envia la posicion del personaje
+	 * Envia la posicion del personaje.
 	 */
 	private void enviarPosicion() {
 		juego.getUbicacionPersonaje().setPosX(x);
@@ -572,7 +745,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Busca el camino más corto a recorrer para llegar a una posición
+	 * Busca el camino más corto a recorrer para llegar a una posición.
 	 * 
 	 * @param xInicial
 	 *            ubicacion en X inicial
@@ -612,7 +785,7 @@ public class Entidad {
 		for (int i = 0; i < grafoLibres.obtenerNodos()[nodoInicial].obtenerCantidadDeAdyacentes(); i++) {
 			if (estanEnDiagonal(grafoLibres.obtenerNodos()[nodoInicial],
 					grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-				vecCostos[adyacentes[i].obtenerIndice()] = 1.5;
+				vecCostos[adyacentes[i].obtenerIndice()] = Constantes.OBTENER_INDICE;
 			} else {
 				vecCostos[adyacentes[i].obtenerIndice()] = 1;
 			}
@@ -642,7 +815,7 @@ public class Entidad {
 				double valorASumar = 1;
 				if (estanEnDiagonal(grafoLibres.obtenerNodos()[indiceMinimo],
 						grafoLibres.obtenerNodos()[adyacentes[i].obtenerIndice()])) {
-					valorASumar = 1.5;
+					valorASumar = Constantes.VALOR_A_SUMAR;
 				}
 				if (vecCostos[indiceMinimo] + valorASumar < vecCostos[adyacentes[i].obtenerIndice()]) {
 					vecCostos[adyacentes[i].obtenerIndice()] = vecCostos[indiceMinimo] + valorASumar;
@@ -662,7 +835,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pregunta si los personajes estan en diagonal
+	 * Pregunta si los personajes estan en diagonal.
 	 * 
 	 * @param nodoUno
 	 *            personaje 1
@@ -678,7 +851,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide el valor de X
+	 * Pide el valor de X.
 	 * 
 	 * @return devuelve la ubicacion en X
 	 */
@@ -687,7 +860,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Setea el valor de X
+	 * Setea el valor de X.
 	 * 
 	 * @param x
 	 *            valor nuevo de la ubicacion en X
@@ -697,7 +870,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide el valor de Y
+	 * Pide el valor de Y.
 	 * 
 	 * @return devuelve la ubicacion en Y
 	 */
@@ -706,7 +879,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Setea el valor de Y
+	 * Setea el valor de Y.
 	 * 
 	 * @param y
 	 *            valor nuevo de la ubicacion en Y
@@ -716,7 +889,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide el ancho
+	 * Pide el ancho.
 	 * 
 	 * @return devuelve el ancho
 	 */
@@ -725,7 +898,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Setea el ancho
+	 * Setea el ancho.
 	 * 
 	 * @param ancho
 	 *            nuevo ancho a setear
@@ -735,7 +908,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide el alto
+	 * Pide el alto.
 	 * 
 	 * @return devuelve el alto
 	 */
@@ -744,7 +917,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Setea el alto
+	 * Setea el alto.
 	 * 
 	 * @param alto
 	 *            nuevo alto a setear
@@ -754,7 +927,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide el offset de X
+	 * Pide el offset de X.
 	 * 
 	 * @return devuelve el offset de X
 	 */
@@ -763,7 +936,7 @@ public class Entidad {
 	}
 
 	/**
-	 * Pide el offset de Y
+	 * Pide el offset de Y.
 	 * 
 	 * @return devuelve el offset de Y
 	 */
