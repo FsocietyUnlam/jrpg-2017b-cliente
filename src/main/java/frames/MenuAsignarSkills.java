@@ -66,7 +66,7 @@ public class MenuAsignarSkills extends JFrame {
 	 */
 	private final Gson gson = new Gson();
 	/**
-	 * Panel.
+	 * Panel contenedor.
 	 */
 	private JPanel contentPane;
 	/**
@@ -89,7 +89,22 @@ public class MenuAsignarSkills extends JFrame {
 	 * label con los puntos.
 	 */
 	private final JLabel labelPuntos;
-
+	/**
+	 * Máxima cantidad de puntos por atributo.
+	 */
+	private static final int MAXIMACANTPUNTOS = 200;
+	/**
+	 * Indice del atributo de fuerza.
+	 */
+	private static final int INDICEATRIBUTOFUERZA = 0;
+	/**
+	 * Indice del atributo de destreza.
+	 */
+	private static final int INDICEATRIBUTODESTREZA = 1;
+	/**
+	 * Indice del atributo de inteligencia.
+	 */
+	private static final int INDICEATRIBUTOINTELIGENCIA = 2;
 	/**
 	 *Create the frame.
 	 *@param cliente del tipo cliente
@@ -109,27 +124,27 @@ public class MenuAsignarSkills extends JFrame {
 		buttonMore = new JButton[CANTATRIBUTOS];
 
 		// OBTENGO LOS PUNTOS ACTUALES
-		puntosTotales[0] = cliente.getPaquetePersonaje().getFuerza();
-		puntosTotales[1] = cliente.getPaquetePersonaje().getDestreza();
-		puntosTotales[2] = cliente.getPaquetePersonaje().getInteligencia();
+		puntosTotales[INDICEATRIBUTOFUERZA] = cliente.getPaquetePersonaje().getFuerza();
+		puntosTotales[INDICEATRIBUTODESTREZA] = cliente.getPaquetePersonaje().getDestreza();
+		puntosTotales[INDICEATRIBUTOINTELIGENCIA] = cliente.getPaquetePersonaje().getInteligencia();
 
 		// ACÁ SACO LOS PUNTOS BASE DE LOS ATRIBUTOS QUE CAMBIAN DEPENDIENDO DE LA
 		// CASTA.
 		String unaCasta = cliente.getPaquetePersonaje().getCasta();
 		if (unaCasta.equals("Asesino")) {
-			puntosBase[1] = 5; // dominio.Asesino.recibirDestrezaBonus();
+			puntosBase[INDICEATRIBUTODESTREZA] = 5; // dominio.Asesino.recibirDestrezaBonus();
 		} else if (unaCasta.equals("Hechicero")) {
-			puntosBase[2] = 5;
+			puntosBase[INDICEATRIBUTOINTELIGENCIA] = 5;
 		} else {
-			puntosBase[0] = 5; // GUERRERO
+			puntosBase[INDICEATRIBUTOFUERZA] = 5; // GUERRERO
 		}
 
 		ArrayList<Item> lista = cliente.getPaquetePersonaje().getItems();
 
 		for (Item a : lista) {
-			puntosBonus[0] += a.getBonusFuerza();
-			puntosBonus[1] += a.getBonusDestreza();
-			puntosBonus[2] += a.getBonusInteligencia();
+			puntosBonus[INDICEATRIBUTOFUERZA] += a.getBonusFuerza();
+			puntosBonus[INDICEATRIBUTODESTREZA] += a.getBonusDestreza();
+			puntosBonus[INDICEATRIBUTOINTELIGENCIA] += a.getBonusInteligencia();
 		}
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -171,7 +186,7 @@ public class MenuAsignarSkills extends JFrame {
 
 		puntosAsignarPorNivel = ((cliente.getPaquetePersonaje().getNivel() - 1) * 3);
 		puntosNoAsignados = puntosAsignarPorNivel
-				- (puntosAsignadosInicialmente[0] + puntosAsignadosInicialmente[1] + puntosAsignadosInicialmente[2]);
+				- (puntosAsignadosInicialmente[INDICEATRIBUTOFUERZA] + puntosAsignadosInicialmente[INDICEATRIBUTODESTREZA] + puntosAsignadosInicialmente[INDICEATRIBUTOINTELIGENCIA]);
 
 		labelPuntos = new JLabel("");
 		labelPuntos.setForeground(Color.WHITE);
@@ -210,8 +225,8 @@ public class MenuAsignarSkills extends JFrame {
 		buttonConfirm.addActionListener(new ActionListener() {
 
 			public void actionPerformed(final ActionEvent e) {
-				cliente.getPaquetePersonaje().useBonus(0, 0, puntosAsignados[0], puntosAsignados[1],
-						puntosAsignados[2]);
+				cliente.getPaquetePersonaje().useBonus(0, 0, puntosAsignados[INDICEATRIBUTOFUERZA], puntosAsignados[INDICEATRIBUTODESTREZA],
+						puntosAsignados[INDICEATRIBUTOINTELIGENCIA]);
 				cliente.getPaquetePersonaje().removerBonus();
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
 				try {
@@ -269,7 +284,7 @@ public class MenuAsignarSkills extends JFrame {
 			}
 			// DESHABILITAR BOTONES DE MORE CUANDO LA CANTIDAD DE PUNTOS QUE TIENEN ES IGUAL
 			// AL LÍMITE MÁXIMO
-			if (puntosTotales[i] == 200) {
+			if (puntosTotales[i] == MAXIMACANTPUNTOS) {
 				buttonMore[i].setEnabled(false);
 			}
 		}
@@ -309,7 +324,7 @@ public class MenuAsignarSkills extends JFrame {
 				labelPuntos.setText(String.valueOf(puntosNoAsignados));
 				labelPuntosAtributos[i].setText(String.valueOf(puntosTotales[i] + puntosAsignados[i]));
 
-				if (puntosAsignados[0] != 0 || puntosAsignados[1] != 0 || puntosAsignados[2] != 0) {
+				if (puntosAsignados[INDICEATRIBUTOFUERZA] != 0 || puntosAsignados[INDICEATRIBUTODESTREZA] != 0 || puntosAsignados[INDICEATRIBUTOINTELIGENCIA] != 0) {
 					buttonConfirm.setEnabled(true);
 				} else {
 					buttonConfirm.setEnabled(false);
@@ -318,9 +333,9 @@ public class MenuAsignarSkills extends JFrame {
 				// DESHABILITAR BOTONES MINUS CUANDO LA CANTIDAD DE PUNTOS NOASIGNADOS SEA IGUAL
 				// A LA CANTIDAD DE PUNTOS A ASIGNAR POR NIVEL
 				if (puntosNoAsignados == puntosAsignarPorNivel) {
-					buttonMinus[0].setEnabled(false);
-					buttonMinus[1].setEnabled(false);
-					buttonMinus[2].setEnabled(false);
+					buttonMinus[INDICEATRIBUTOFUERZA].setEnabled(false);
+					buttonMinus[INDICEATRIBUTODESTREZA].setEnabled(false);
+					buttonMinus[INDICEATRIBUTOINTELIGENCIA].setEnabled(false);
 				} else {
 					if ((puntosTotales[i] + puntosAsignados[i]) == puntosLimiteMinimo[i]) {
 						buttonMinus[i].setEnabled(false);
@@ -330,7 +345,7 @@ public class MenuAsignarSkills extends JFrame {
 				// HABILITAR BOTONES MORE QUE NO ESTEN EN EL LÍMITE MÁXIMO
 				int j;
 				for (j = 0; j < CANTATRIBUTOS; j++) {
-					if ((puntosTotales[j] + puntosAsignados[j]) < 200) {
+					if ((puntosTotales[j] + puntosAsignados[j]) < MAXIMACANTPUNTOS) {
 						buttonMore[j].setEnabled(true);
 					}
 				}
@@ -351,12 +366,12 @@ public class MenuAsignarSkills extends JFrame {
 				labelPuntos.setText(String.valueOf(puntosNoAsignados));
 				labelPuntosAtributos[i].setText(String.valueOf(puntosTotales[i] + puntosAsignados[i]));
 
-				if (puntosAsignados[0] != 0 || puntosAsignados[1] != 0 || puntosAsignados[2] != 0) {
+				if (puntosAsignados[INDICEATRIBUTOFUERZA] != 0 || puntosAsignados[INDICEATRIBUTODESTREZA] != 0 || puntosAsignados[INDICEATRIBUTOINTELIGENCIA] != 0) {
 					buttonConfirm.setEnabled(true);
 				} else {
 					buttonConfirm.setEnabled(false);
 				}
-				if ((puntosTotales[i] + puntosAsignados[i]) == 200) {
+				if ((puntosTotales[i] + puntosAsignados[i]) == MAXIMACANTPUNTOS) {
 					buttonMore[i].setEnabled(false);
 				}
 
@@ -378,9 +393,9 @@ public class MenuAsignarSkills extends JFrame {
 	private void comprobarPuntosNoAsignados() {
 		if (puntosNoAsignados == 0) {
 
-			buttonMore[0].setEnabled(false);
-			buttonMore[1].setEnabled(false);
-			buttonMore[2].setEnabled(false);
+			buttonMore[INDICEATRIBUTOFUERZA].setEnabled(false);
+			buttonMore[INDICEATRIBUTODESTREZA].setEnabled(false);
+			buttonMore[INDICEATRIBUTOINTELIGENCIA].setEnabled(false);
 		}
 	}
 
