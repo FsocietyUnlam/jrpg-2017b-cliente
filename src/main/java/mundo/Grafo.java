@@ -1,33 +1,70 @@
 package mundo;
 
+/**
+ * Clase Grafo.
+ */
 public class Grafo {
 
+	/**
+	 * the cantidadDeNodos.
+	 */
 	private int cantidadDeNodos;
+	/**
+	 * the cantidadDeNodosTotal.
+	 */
 	private int cantidadDeNodosTotal;
-	private Nodo [] nodos;
+	/**
+	 * the nodos.
+	 */
+	private Nodo[] nodos;
 
-	public Grafo(int cantidadDeNodosTotal) {
+	/**
+	 * Constructor de la clase Grafo.
+	 * @param cantidadDeNodosTotal .
+	 */
+	public Grafo(final int cantidadDeNodosTotal) {
 		cantidadDeNodos = 0;
 		nodos = new Nodo[cantidadDeNodosTotal];
 		this.cantidadDeNodosTotal = cantidadDeNodosTotal;
 	}
 
-	public void agregarNodo(Nodo nodo) {
+	/**
+	 * Agrega un nodo.
+	 * @param nodo .
+	 */
+	public void agregarNodo(final Nodo nodo) {
 		nodos[cantidadDeNodos++] = nodo;
 	}
 
-	public void agregarAdyacentes(Nodo nodoUno, Nodo nodoDos) {
+	/**
+	 * Agrega Adyacentes.
+	 * @param nodoUno .
+	 * @param nodoDos .
+	 */
+	public void agregarAdyacentes(final Nodo nodoUno, final Nodo nodoDos) {
 		nodoUno.agregarAdyacente(nodoDos);
 	}
 
-	public Nodo [] obtenerNodos() {
+	/**
+	 * Se obtiene los nodos.
+	 * @return un vector de nodos.
+	 */
+	public Nodo[] obtenerNodos() {
 		return nodos;
 	}
 
+	/**
+	 * Obtiene la cantidad de nodos.
+	 * @return un entero.
+	 */
 	public int obtenerCantidadDeNodos() {
 		return cantidadDeNodos;
 	}
 
+	/**
+	 * Se obtiene el total de nodos.
+	 * @return un entero.
+	 */
 	public int obtenerCantidadDeNodosTotal() {
 		return cantidadDeNodosTotal;
 	}

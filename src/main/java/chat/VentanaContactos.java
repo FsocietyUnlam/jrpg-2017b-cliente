@@ -21,6 +21,7 @@ import javax.swing.border.EmptyBorder;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaquetePersonaje;
+import variables.Constantes;
 
 public class VentanaContactos extends JFrame {
     /**
@@ -119,7 +120,7 @@ public class VentanaContactos extends JFrame {
         scrollPane.setViewportView(list);
 
         background = new JLabel(new ImageIcon("recursos//background.jpg"));
-        background.setBounds(-16, 0, 352, 254);
+        background.setBounds(-Constantes.VENTANA_CONTACTOS_16, Constantes.VENTANA_CONTACTOS_0, Constantes.VENTANA_CONTACTOS_352, Constantes.VENTANA_CONTACTOS_254);
         contentPane.add(background);
     }
 /**

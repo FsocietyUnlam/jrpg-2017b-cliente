@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
+import variables.Constantes;
 
 /**
 * Clase Michat.
@@ -160,13 +161,13 @@ public class MiChat extends JFrame {
                 texto.requestFocus();
             }
         });
-        enviar.setBounds(334, 225, 81, 23);
+        enviar.setBounds(Constantes.MI_CHAT_334, Constantes.MI_CHAT_225, Constantes.MI_CHAT_81, Constantes.MI_CHAT_23);
         contentPane.add(enviar);
 
-        texto.setBounds(10, 223, 314, 27);
+        texto.setBounds(Constantes.MI_CHAT_10, Constantes.MI_CHAT_223, Constantes.MI_CHAT_314, Constantes.MI_CHAT_27);
         contentPane.add(texto);
-        texto.setColumns(10);
-        background.setBounds(-20, 0, 480, 283);
+        texto.setColumns(Constantes.MI_CHAT_10);
+        background.setBounds(-Constantes.MI_CHAT_20, Constantes.MI_CHAT_0, Constantes.MI_CHAT_480, Constantes.MI_CHAT_283);
         contentPane.add(background);
     }
 /**

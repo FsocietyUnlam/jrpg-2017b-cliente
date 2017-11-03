@@ -53,7 +53,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private ArrayList<Item> items = new ArrayList<Item>();
 
 	public PaquetePersonaje() throws IOException {
-		estado = Estado.estadoOffline;
+		estado = Estado.getEstadoOffline();
 	}
 
 	public int getEstado() {
