@@ -109,7 +109,7 @@ public class MenuEscape extends JFrame {
 			}
 		});
 		contentPane.add(inventario);
-
+		
 		JButton desconectarse = new JButton("Desconectarse");
 		desconectarse.setBounds(29, 175, 125, 25);
 		desconectarse.setIcon(new ImageIcon("recursos//desconectarse.png"));
