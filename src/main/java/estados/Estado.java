@@ -16,19 +16,25 @@ public abstract class Estado {
 	/**
 	 * the estadoOffline.
 	 */
-	private static int estadoOffline = 0;
+	public static int estadoOffline = 0;
 	/**
 	 * the estadoJuego.
 	 */
-	private static int estadoJuego = 1;
+	public static int estadoJuego = 1;
 	/**
 	 * the estadoBatalla.
 	 */
-	private static int estadoBatalla = 2;
+	public static int estadoBatalla = 2;
+	
+    /**
+     * The estado batalla NPC.
+     */
+    public static final int ESTADOBATALLANPC = 3;
+    
 	/**
 	 * the juego.
 	 */
-	private Juego juego;
+	protected Juego juego;
 
 	/**
 	 * Constructor de la clase Juego.

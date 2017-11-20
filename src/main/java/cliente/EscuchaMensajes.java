@@ -11,6 +11,7 @@ import comandos.ComandosEscucha;
 import juego.Juego;
 import mensajeria.Comando;
 import mensajeria.Paquete;
+import mensajeria.PaqueteEnemigo;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 
@@ -61,6 +62,7 @@ public class EscuchaMensajes extends Thread {
             ComandosEscucha comand;
             juego.setPersonajesConectados(new HashMap<Integer, PaquetePersonaje>());
             juego.setUbicacionPersonajes(new HashMap<Integer, PaqueteMovimiento>());
+            juego.setEnemigos(new HashMap<Integer, PaqueteEnemigo>());
 
             while (true) {
 
@@ -68,6 +70,7 @@ public class EscuchaMensajes extends Thread {
 
                 paquete = gson.fromJson(objetoLeido, Paquete.class);
                 comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
+                System.out.println(comand.getClass());
                 comand.setJuego(juego);
                 comand.setCadena(objetoLeido);
                 comand.ejecutar();
@@ -77,16 +80,5 @@ public class EscuchaMensajes extends Thread {
             JOptionPane.showMessageDialog(null, "Fallo la conexión con el servidor.");
         }
     }
-    /**
-     * Pide la ubicacion de los personajes
-     *
-     * @return devuelve el mapa con la ubicacion de los personajes
-     */
-
-    /**
-     * Pide los personajes conectados
-     *
-     * @return devuelve el mapa con los personajes conectados
-     */
 
 }
