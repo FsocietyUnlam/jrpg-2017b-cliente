@@ -9,14 +9,18 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import javax.swing.JOptionPane;
+
 import com.google.gson.Gson;
+
 import entidades.Entidad;
 import interfaz.EstadoDePersonaje;
 import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.Comando;
+import mensajeria.PaqueteEnemigo;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
 import mundo.Mundo;
@@ -47,6 +51,12 @@ public class EstadoJuego extends Estado {
 	 * the personajesConectados.
 	 */
 	private Map<Integer, PaquetePersonaje> personajesConectados;
+	
+    /**
+     * The enemigos.
+     */
+    private Map<Integer, PaqueteEnemigo> enemigos;
+    
 	/**
 	 * the haySolicitud.
 	 */
@@ -76,7 +86,7 @@ public class EstadoJuego extends Estado {
 	 * Constructor de la clase EstadoJuego.
 	 * @param juego .
 	 */
-	public EstadoJuego(final Juego juego) {
+	public EstadoJuego( Juego juego) {
 		super(juego);
 		mundo = new Mundo(juego, "recursos/" + getMundo() + ".txt", "recursos/" + getMundo() + ".txt");
 		paquetePersonaje = juego.getPersonaje();
@@ -115,6 +125,7 @@ public class EstadoJuego extends Estado {
 		mundo.graficar(g);
 		// entidadPersonaje.graficar(g);
 		graficarPersonajes(g);
+		 graficarEnemigos(g);
 		mundo.graficarObstaculos(g);
 		entidadPersonaje.graficarNombre(g);
 		g.drawImage(Recursos.marco, 0, 0, getJuego().getAncho(), getJuego().getAlto(), null);
@@ -127,6 +138,42 @@ public class EstadoJuego extends Estado {
 		}
 
 	}
+	  /**
+     * Graficar enemigos.
+     *
+     * @param g
+     *            the g
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private void graficarEnemigos(final Graphics g) {
+        if (juego.getEnemigos() != null) {
+            enemigos = new HashMap(juego.getEnemigos());
+            Iterator<Integer> it = enemigos.keySet().iterator();
+            int key;
+            PaqueteEnemigo actual;
+            g.setColor(Color.WHITE);
+            g.setFont(new Font("Book Antiqua", Font.PLAIN, 15));
+            while (it.hasNext()) {
+                key = it.next();
+                actual = enemigos.get(key);
+                if (actual != null && enemigos.get(actual.getId())
+                        .getEstado() == Estado.estadoJuego) {
+                    Pantalla.centerString(g, new Rectangle(
+                            (int) (actual.getX()
+                                    - juego.getCamara().getxOffset() + 32),
+                            (int) (actual.getY()
+                                    - juego.getCamara().getyOffset() - 20),
+                            0, 10), enemigos.get(actual.getId()).getNombre());
+                    g.drawImage(Recursos.getShrek().get(5)[0],
+                            (int) (actual.getX()
+                                    - juego.getCamara().getxOffset()),
+                            (int) (actual.getY()
+                                    - juego.getCamara().getyOffset()),
+                            64, 64, null);
+                }
+            }
+        }
+    }
 
 	/**
 	 * Grafica los personajes.

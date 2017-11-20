@@ -41,7 +41,23 @@ public class EstadoBatalla extends Estado {
 	private PaqueteAtacar paqueteAtacar;
 	private PaqueteFinalizarBatalla paqueteFinalizarBatalla;
 	private boolean miTurno;
+	
+    /**
+     * The Constant PUNTOSSKILLSPORNIVEL.
+     */
+    private static final int PUNTOSSKILLSPORNIVEL = 3;
 
+	
+    /**
+     * The nivel de enemigo.
+     */
+    private int nivelDeEnemigo;
+    
+    /**
+     * The nivel de personaje.
+     */
+    private int nivelDePersonaje;
+    
 	private boolean haySpellSeleccionada;
 	private boolean seRealizoAccion;
 
@@ -72,7 +88,7 @@ public class EstadoBatalla extends Estado {
 		paqueteFinalizarBatalla.setIdEnemigo(enemigo.getIdPersonaje());
 
 		// por defecto batalla perdida
-		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.MENUPERDERBATALLA);
+		juego.getEstadoJuego().setHaySolicitud(true, juego.getPersonaje(), MenuInfoPersonaje.menuPerderBatalla);
 
 		// limpio la accion del mouse
 		juego.getHandlerMouse().setNuevoClick(false);
@@ -275,6 +291,19 @@ public class EstadoBatalla extends Estado {
 			paqueteEnemigo.setInteligencia(enemigo.getInteligencia());
 			paqueteEnemigo.removerBonus();
 
+	           /**
+          * Se verifica si Mi Personaje o El Enemigo subio de nivel al ganar
+          * la batalla, para asignar puntos de Skills, esto deberia ir donde
+          * sube de nivel (refactorear)
+          */
+         if (paquetePersonaje.getNivel() > this.nivelDePersonaje) {
+             paquetePersonaje.actualizarPuntosSkillsDisponibles(
+                     PUNTOSSKILLSPORNIVEL);
+         } else if (paqueteEnemigo.getNivel() > this.nivelDeEnemigo) {
+             paqueteEnemigo.actualizarPuntosSkillsDisponibles(
+                     PUNTOSSKILLSPORNIVEL);
+         }
+         
 			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
 			paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
 

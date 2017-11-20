@@ -25,6 +25,11 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	
+	   /**
+     * The puntos skills disponibles.
+     */
+    private int puntosSkillsDisponibles;
 
 	// private int puntosGanados;
 	// private ArrayList<Item> items = new ArrayList<Item>();
@@ -302,4 +307,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			this.items.add(item);
 		}
 	}
+	
+    /**
+     * Actualizar puntos skills disponibles.
+     *
+     * @param puntosSkillsDisponiblesParam
+     *            the puntos skills disponibles
+     */
+    public void actualizarPuntosSkillsDisponibles(
+            final int puntosSkillsDisponiblesParam) {
+        this.puntosSkillsDisponibles += puntosSkillsDisponiblesParam;
+    }
 }

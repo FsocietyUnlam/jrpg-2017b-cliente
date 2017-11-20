@@ -8,12 +8,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 
 import com.google.gson.Gson;
 
 import chat.VentanaContactos;
+import dominio.Enemigo;
 import estados.Estado;
 import frames.MenuEscape;
 import frames.MenuInventario;
@@ -21,13 +23,14 @@ import interfaz.MenuInfoPersonaje;
 import juego.Juego;
 import juego.Pantalla;
 import mensajeria.PaqueteBatalla;
+import mensajeria.PaqueteBatallaNPC;
 import mensajeria.PaqueteComerciar;
+import mensajeria.PaqueteEnemigo;
 import mensajeria.PaqueteMovimiento;
 import mundo.Grafo;
 import mundo.Mundo;
 import mundo.Nodo;
 import recursos.Recursos;
-
 import variables.Constantes;
 
 /**
@@ -621,6 +624,7 @@ public class Entidad {
 
 			// Le envio la posicion
 			if (intervaloEnvio == 2) {
+				 verificarRangoEnemigo();
 				enviarPosicion();
 				intervaloEnvio = 0;
 			}
@@ -631,6 +635,47 @@ public class Entidad {
 			}
 		}
 	}
+	
+    /**
+     * Verificar rango enemigo.
+     */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    private void verificarRangoEnemigo() {
+        if (juego.getEnemigos() != null) {
+            Map<Integer, PaqueteEnemigo> enemigos;
+            enemigos = new HashMap(juego.getEnemigos());
+
+            Iterator<Integer> it = enemigos.keySet().iterator();
+            int key;
+            PaqueteEnemigo actual;
+
+            while (it.hasNext()) {
+                key = it.next();
+                actual = enemigos.get(key);
+                if (actual != null 
+                        && actual.getEstado() == Estado.estadoJuego) {
+                    if (Math.sqrt(Math.pow(actual.getX() - x, 2) + Math
+                            .pow(actual.getY() - y, 2)) <= Enemigo.RANGO) {
+
+                        PaqueteBatallaNPC pBatalla = new PaqueteBatallaNPC();
+                        pBatalla.setId(juego.getPersonaje().getId());
+                        pBatalla.setIdEnemigo(key);
+
+                        try {
+                            juego.getCliente().getSalida()
+                                    .writeObject(gson.toJson(pBatalla));
+                        } catch (IOException e) {
+                            System.out.println(
+                                    "Error al enviar paquete Batalla NPC");
+                        }
+
+              
+                        break;
+                    }
+                }
+            }
+        }
+    }
 
 	/**
 	 * Grafica el frame del personaje.

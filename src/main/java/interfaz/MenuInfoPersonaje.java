@@ -45,7 +45,9 @@ public class MenuInfoPersonaje {
 	/**
 	 * Atributo estatico del tipo entero para el valor del menu PerderBatalla.
 	 */
-	public static final int MENUPERDERBATALLA = 4;
+	public static final int menuPerderBatalla = 4;
+	
+
 	/**
 	 * Atributo estatico del tipo entero para el valor del menu Ganar item.
 	 */
@@ -115,7 +117,7 @@ public class MenuInfoPersonaje {
 		case MENUGANARBATALLA:
 			graficarMenuGanarBatalla(g);
 			break;
-		case MENUPERDERBATALLA:
+		case menuPerderBatalla:
 			graficarMenuPerderBatalla(g);
 			break;
 		case MENUGANARITEM:

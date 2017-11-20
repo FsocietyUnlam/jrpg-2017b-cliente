@@ -36,6 +36,12 @@ public class Recursos {
 	 * para los personajes (humano, ogro, elfo).
 	 */
 	public static Map<String, LinkedList<BufferedImage[]>> personaje = new HashMap<>();
+	
+    /**
+     * Hash de imagenes para los enemigos
+     */
+    private static Map<String, LinkedList<BufferedImage[]>> enemigos
+                    = new HashMap<>();
 
 	private static SpriteSheet spriteHumano;
 	public static LinkedList<BufferedImage[]> humano = new LinkedList<>();
@@ -365,6 +371,86 @@ public class Recursos {
 		elfo.add(elfoAbajoDer);
 		elfo.add(elfoAbajo);
 		elfo.add(elfoAbajoIzq);
+		
+		 // Inicio Enemigo Shrek
+
+        spriteEnemigoShrek = new SpriteSheet(
+                CargadorImagen.cargarImagen("/Ogro.png"));
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        enemigoShrek = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekArribaIzq = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekArriba = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekArribaDer = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekDer = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekAbajoDer = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekAbajo = new BufferedImage[TAMANIO_BUFFER];
+        enemigoShrekAbajoIzq = new BufferedImage[TAMANIO_BUFFER];
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrek[i] = spriteEnemigoShrek.getTile(ANCHO * i, 0, ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekArribaIzq[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO, ANCHO,
+            		ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekArriba[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO * 2, ANCHO,
+            		ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekArribaDer[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO * 3,
+            		ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekDer[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO * 4, ANCHO,
+            		ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekAbajoDer[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO * 5,
+            		ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekAbajo[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO * 6, ANCHO,
+            		ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        for (int i = 0; i < TAMANIO_BUFFER; i++) {
+            enemigoShrekAbajoIzq[i] = spriteEnemigoShrek.getTile(ANCHO * i, ALTO * 7,
+            		ANCHO, ALTO);
+        }
+
+        actualizarBarraDeCarga(++elementosCargados, menuCarga);
+
+        shrek.add(enemigoShrek);
+        shrek.add(enemigoShrekArribaIzq);
+        shrek.add(enemigoShrekArriba);
+        shrek.add(enemigoShrekArribaDer);
+        shrek.add(enemigoShrekDer);
+        shrek.add(enemigoShrekAbajoDer);
+        shrek.add(enemigoShrekAbajo);
+        shrek.add(enemigoShrekAbajoIzq);
 
 		// Fin Elfo
 
@@ -372,6 +458,7 @@ public class Recursos {
 		personaje.put("Humano", humano);
 		personaje.put("Orco", orco);
 		personaje.put("Elfo", elfo);
+		  enemigos.put("Salvaje", shrek);
 
 		// Inicio Entorno
 		cesped = CargadorImagen.cargarImagen("/Cesped.png");
@@ -511,4 +598,101 @@ public class Recursos {
 	private static void actualizarBarraDeCarga(final int elementosCargados, final MenuCarga menuCarga) {
 		menuCarga.setBarraCargando(elementosCargados * ANCHOBARRA / ELEMENTOS);
 	}
+	
+	/** Es un Enemigo. */
+    private static SpriteSheet spriteEnemigoShrek;
+
+    /**
+     * El shrek.
+     */
+    private static LinkedList<BufferedImage[]> shrek = new LinkedList<>();
+
+    /**
+     * El shrek izq.
+     */
+    private static BufferedImage[] enemigoShrek;
+
+    /**
+     * El shrek arriba izq.
+     */
+    private static BufferedImage[] enemigoShrekArribaIzq;
+
+    /**
+     * El shrek arriba.
+     */
+    private static BufferedImage[] enemigoShrekArriba;
+
+    /**
+     * El shrek arriba der.
+     */
+    private static BufferedImage[] enemigoShrekArribaDer;
+
+    /**
+     * El shrek der.
+     */
+    private static BufferedImage[] enemigoShrekDer;
+
+    /**
+     * El shrek abajo der.
+     */
+    private static BufferedImage[] enemigoShrekAbajoDer;
+
+    /**
+     * El shrek abajo.
+     */
+    private static BufferedImage[] enemigoShrekAbajo;
+
+    /**
+     * El shrek abajo izq.
+     */
+    private static BufferedImage[] enemigoShrekAbajoIzq;
+    
+    /**
+     * @return the enemigos
+     */
+    public static Map<String, LinkedList<BufferedImage[]>> getEnemigos() {
+        return enemigos;
+    }
+    /**
+     * @param enemigosParam
+     *            the enemigos to set
+     */
+    public static void setEnemigos(
+            final Map<String, LinkedList<BufferedImage[]>> enemigosParam) {
+        Recursos.enemigos = enemigosParam;
+    }
+    public static LinkedList<BufferedImage[]> getShrek() {
+        return shrek;
+    }
+    
+    /**
+     * @param shrekParam
+     *            the shrek to set
+     */
+    public static void setShrek(
+            final LinkedList<BufferedImage[]> shrekParam) {
+        Recursos.shrek = shrekParam;
+    }
+    
+    /**
+     * @return the estadoPersonaje
+     */
+    public static BufferedImage getEstadoPersonaje() {
+        return estadoPersonaje;
+    }
+    
+    /**
+     * @return the barraSalud
+     */
+    public static BufferedImage getBarraSalud() {
+        return barraSalud;
+    }
+    /**
+     * @return the personaje
+     */
+    public static Map<String, LinkedList<BufferedImage[]>> getPersonaje() {
+        return personaje;
+    }
+
+    
 }
