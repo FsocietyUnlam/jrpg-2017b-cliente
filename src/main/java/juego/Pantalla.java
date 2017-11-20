@@ -26,6 +26,8 @@ import chat.VentanaContactos;
 import cliente.Cliente;
 import estados.Estado;
 import frames.MenuAsignarSkills;
+import frames.MenuAsignarSkillsGodMode;
+import frames.MenuCheats;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import frames.MenuJugar;
@@ -38,9 +40,36 @@ public class Pantalla {
 	private JFrame pantalla;
 	private Canvas canvas;
 
+	/**
+	 * Constante para activar el menú de inventario con la tecla I.
+	 */
+	private static int TECLA_I =73;
+	/**
+	 * Constante para activar el menú AsignarSkills con la tecla A.
+	 */
+	private static int TECLA_A =65;
+	/**
+	 * Constante para activar el menú de Cheats con la tecla T.
+	 */
+	private static int TECLA_T =84;
+	/**
+	 * Constante para activar el menú de Stats con la tecla S.
+	 */
+	private static int TECLA_S =83;
+	/**
+	 * Constante para salir del menú con la tecla Escape.
+	 */
+	private static int TECLA_ESC =27;
+	/**
+	 * Constante para activar el menú de contactos con la tecla C.
+	 */
+	private static int TECLA_C =67;
+
 	// Menus
+	public static MenuCheats menuCheats;
 	public static MenuInventario menuInventario;
 	public static MenuAsignarSkills menuAsignar;
+	public static MenuAsignarSkillsGodMode menuAsignarGodMode;
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
@@ -82,11 +111,12 @@ public class Pantalla {
 		this.cliente = cliente;
 		comandos = new HashMap<Integer, Runnable>() {
 			{
-				put(73, () -> mostrarInventario()); // Tecla I
-				put(65, () -> mostrarMenuAsignarSkills()); // Tecla A
-				put(83, () -> mostrarMenuStats()); // Tecla S
-				put(27, () -> mostrarMenuEscape()); // Tecla ESC
-				put(67, () -> mostrarVentanaContactos()); // Tecla C
+				put(TECLA_I, () -> mostrarInventario());
+				put(TECLA_A, () -> mostrarMenuAsignarSkills());
+				put(TECLA_T, () -> mostrarMenuCheats());
+				put(TECLA_S, () -> mostrarMenuStats());
+				put(TECLA_ESC, () -> mostrarMenuEscape());
+				put(TECLA_C, () -> mostrarVentanaContactos());
 			}
 
 		};
@@ -144,6 +174,24 @@ public class Pantalla {
 			// if (menuAsignar == null) {
 			menuAsignar = new MenuAsignarSkills(cliente);
 			menuAsignar.setVisible(true);
+			// }
+		}
+	}
+	
+	/*private void mostrarMenuAsignarSkillsGodMode() {
+		if (Estado.getEstado().esEstadoDeJuego() && menuAsignarGodMode == null) {
+			// if (menuAsignar == null) {
+			menuAsignarGodMode = new MenuAsignarSkillsGodMode(cliente);
+			menuAsignarGodMode.setVisible(true);
+			// }
+		}
+	}*/
+	
+	private void mostrarMenuCheats() {
+		if (Estado.getEstado().esEstadoDeJuego() && menuCheats == null) {
+			// if (menuAsignar == null) {
+			menuCheats = new MenuCheats(cliente);
+			menuCheats.setVisible(true);
 			// }
 		}
 	}
