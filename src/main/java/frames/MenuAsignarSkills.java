@@ -106,6 +106,14 @@ public class MenuAsignarSkills extends JFrame {
 	 */
 	private static final int INDICEATRIBUTOINTELIGENCIA = 2;
 	/**
+	 * Puntaje de atributo inicial.
+	 */
+	private static final int PUNTAJEDEATRIBUTOINICIAL = 10;
+	/**
+	 * Puntaje extra por la casta del personaje.
+	 */
+	private static final int PUNTAJEDEEXTRAPORCASTA = 5;
+	/**
 	 *Create the frame.
 	 *@param cliente del tipo cliente
 	 */
@@ -128,15 +136,14 @@ public class MenuAsignarSkills extends JFrame {
 		puntosTotales[INDICEATRIBUTODESTREZA] = cliente.getPaquetePersonaje().getDestreza();
 		puntosTotales[INDICEATRIBUTOINTELIGENCIA] = cliente.getPaquetePersonaje().getInteligencia();
 
-		// ACÁ SACO LOS PUNTOS BASE DE LOS ATRIBUTOS QUE CAMBIAN DEPENDIENDO DE LA
-		// CASTA.
+		// ACÁ SACO LOS PUNTOS BASE DE LOS ATRIBUTOS QUE CAMBIAN DEPENDIENDO DE LA CASTA.
 		String unaCasta = cliente.getPaquetePersonaje().getCasta();
 		if (unaCasta.equals("Asesino")) {
-			puntosBase[INDICEATRIBUTODESTREZA] = 5; // dominio.Asesino.recibirDestrezaBonus();
+			puntosBase[INDICEATRIBUTODESTREZA] = PUNTAJEDEEXTRAPORCASTA;
 		} else if (unaCasta.equals("Hechicero")) {
-			puntosBase[INDICEATRIBUTOINTELIGENCIA] = 5;
+			puntosBase[INDICEATRIBUTOINTELIGENCIA] = PUNTAJEDEEXTRAPORCASTA;
 		} else {
-			puntosBase[INDICEATRIBUTOFUERZA] = 5; // GUERRERO
+			puntosBase[INDICEATRIBUTOFUERZA] = PUNTAJEDEEXTRAPORCASTA; // GUERRERO
 		}
 
 		ArrayList<Item> lista = cliente.getPaquetePersonaje().getItems();
@@ -174,7 +181,7 @@ public class MenuAsignarSkills extends JFrame {
 
 		int posicionlabelPunto = 43;
 		for (i = 0; i < CANTATRIBUTOS; i++) {
-			puntosBase[i] += 10;
+			puntosBase[i] += PUNTAJEDEATRIBUTOINICIAL;
 			puntosLimiteMinimo[i] = puntosBase[i] + puntosBonus[i];
 			puntosAsignadosInicialmente[i] = puntosTotales[i] - puntosLimiteMinimo[i];
 			labelPuntosAtributos[i] = new JLabel("");
