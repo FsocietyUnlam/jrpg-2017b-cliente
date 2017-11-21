@@ -20,15 +20,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 //import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-//import com.google.gson.Gson;
+import com.google.gson.Gson;
 import cliente.Cliente;
 import estados.Estado;
 //import dominio.Item;
 import juego.Pantalla;
+import mensajeria.Comando;
+
 //import mensajeria.Comando;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Clase la cual es el menú de cheats.
@@ -154,8 +157,18 @@ public class MenuCheats extends JFrame {
 			JOptionPane.showMessageDialog(null, "BochoMan activado, tendrá la inteligencia al máximo.");
 			//puntosTotales[2] = cliente.getPaquetePersonaje().getInteligencia();
 			//Actualizar
+		}else if(clave.equals("invulnerable")) {
+			JOptionPane.showMessageDialog(null, "Invulnerable activado, No recibirá daño alguno en las próximas batallas de esta sesión.");
+			cliente.getPaquetePersonaje().setInvulnerable(true);
+		}else if(clave.equals("godmode")) {
+			JOptionPane.showMessageDialog(null, "GodMode activado, tendrá todos los atributos al máximo en las próximas batallas de esta sesión.");
+			cliente.getPaquetePersonaje().setGodMode(true);
+		}else if(clave.equals("cheta nordelta")) {
+			cliente.getPaquetePersonaje().setNivel(cliente.getPaquetePersonaje().getNivel()+1);
+			cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
+			JOptionPane.showMessageDialog(null, "Cheta de nordelta activado, aumentó su nivel a " + cliente.getPaquetePersonaje().getNivel() + ".");
 		}else {
-			JOptionPane.showMessageDialog(null, "Código incorrecto LTA.");
+			JOptionPane.showMessageDialog(null, "Código incorrecto, LTA.");
 		}
 		Pantalla.menuCheats = null;
 		dispose();

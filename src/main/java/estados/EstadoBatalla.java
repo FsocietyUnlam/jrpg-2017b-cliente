@@ -147,7 +147,8 @@ public class EstadoBatalla extends Estado {
 								MenuInfoPersonaje.MENUGANARBATALLA);
 						if (personaje.ganarExperiencia(enemigo.getNivel() * 40)) {
 							getJuego().getPersonaje().setNivel(personaje.getNivel());
-							getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(), MenuInfoPersonaje.MENUSUBIRNIVEL);
+							getJuego().getEstadoJuego().setHaySolicitud(true, getJuego().getPersonaje(),
+									MenuInfoPersonaje.MENUSUBIRNIVEL);
 						}
 						paqueteFinalizarBatalla.setGanadorBatalla(getJuego().getPersonaje().getId());
 						finalizarBatalla();
@@ -195,14 +196,25 @@ public class EstadoBatalla extends Estado {
 
 	private void crearPersonajes() {
 		String nombre = paquetePersonaje.getNombre();
-		int salud = paquetePersonaje.getSaludTope();
-		int energia = paquetePersonaje.getEnergiaTope();
-		int fuerza = paquetePersonaje.getFuerza();
-		int destreza = paquetePersonaje.getDestreza();
-		int inteligencia = paquetePersonaje.getInteligencia();
+		int salud, energia, fuerza, destreza, inteligencia;
 		int experiencia = paquetePersonaje.getExperiencia();
 		int nivel = paquetePersonaje.getNivel();
 		int id = paquetePersonaje.getId();
+		personaje.setGodMode(paquetePersonaje.getGodMode());
+		
+		if (paquetePersonaje.getGodMode()) {
+			salud = paquetePersonaje.getSaludTope();
+			energia = paquetePersonaje.getEnergiaTope();
+			fuerza = personaje.getTopeFuerza();
+			destreza = personaje.getTopeDestreza();
+			inteligencia = personaje.getTopeInteligencia();
+		} else {
+			salud = paquetePersonaje.getSaludTope();
+			energia = paquetePersonaje.getEnergiaTope();
+			fuerza = paquetePersonaje.getFuerza();
+			destreza = paquetePersonaje.getDestreza();
+			inteligencia = paquetePersonaje.getInteligencia();
+		}
 
 		Casta casta = null;
 		try {
@@ -256,6 +268,7 @@ public class EstadoBatalla extends Estado {
 		try {
 			getJuego().getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 
+			//Ver si a personaje y a enemigo se le modifican los atributos antes de finalizar batalla
 			paquetePersonaje.setSaludTope(personaje.getSaludTope());
 			paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
 			paquetePersonaje.setNivel(personaje.getNivel());

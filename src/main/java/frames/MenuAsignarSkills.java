@@ -136,7 +136,7 @@ public class MenuAsignarSkills extends JFrame {
 		puntosTotales[INDICEATRIBUTODESTREZA] = cliente.getPaquetePersonaje().getDestreza();
 		puntosTotales[INDICEATRIBUTOINTELIGENCIA] = cliente.getPaquetePersonaje().getInteligencia();
 
-		// ACÁ SACO LOS PUNTOS BASE DE LOS ATRIBUTOS QUE CAMBIAN DEPENDIENDO DE LA CASTA.
+		// ACÁ SACO LOS PUNTOS BASE DE LOS ATRIBUTOS QUE CAMBIAN DEPENDIENDO DE LA CASTA.		
 		String unaCasta = cliente.getPaquetePersonaje().getCasta();
 		if (unaCasta.equals("Asesino")) {
 			puntosBase[INDICEATRIBUTODESTREZA] = PUNTAJEDEEXTRAPORCASTA;

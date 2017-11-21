@@ -25,6 +25,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	private boolean godMode;
+	private boolean invulnerable;
 
 	// private int puntosGanados;
 	// private ArrayList<Item> items = new ArrayList<Item>();
@@ -159,7 +161,30 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	public void setInteligencia(int inteligencia) {
 		this.inteligencia = inteligencia;
 	}
+	
+	public void setGodMode(boolean godMode) {
+		this.godMode = godMode;
+	}
+	
+	public boolean getGodMode() {
+		return godMode;
+	}
 
+	/**
+	 * Devuelve si esta en el estado invulnerable.
+	 */
+	public final boolean getInvulnerable() {
+		return this.invulnerable;
+	}
+	
+	/**
+	 * Setea el estado invulnerable.
+	 * @param invulnerable
+	 */
+	public final void setInvulnerable(boolean invulnerable) {
+		this.invulnerable = invulnerable;
+	}
+	
 	@Override
 	public Object clone() {
 		Object obj = null;
