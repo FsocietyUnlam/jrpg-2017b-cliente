@@ -25,7 +25,38 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
+	private int invulnerable;
+	private int dobleFuerza;
+	private int mitadFuerza;
+	private int invisible;
+	private int atravesarParedes;
+	private int ptosAsigFuerza;
+	private int ptosAsigDestreza;
+	private int ptosAsigInteligencia;
+	
+	public int getPtosAsigFuerza() {
+		return ptosAsigFuerza;
+	}
 
+	public void setPtosAsigFuerza(int ptosAsigFuerza) {
+		this.ptosAsigFuerza = ptosAsigFuerza;
+	}
+
+	public int getPtosAsigDestreza() {
+		return ptosAsigDestreza;
+	}
+
+	public void setPtosAsigDestreza(int ptosAsigDestreza) {
+		this.ptosAsigDestreza = ptosAsigDestreza;
+	}
+
+	public int getPtosAsigInteligencia() {
+		return ptosAsigInteligencia;
+	}
+
+	public void setPtosAsigInteligencia(int ptosAsigInteligencia) {
+		this.ptosAsigInteligencia = ptosAsigInteligencia;
+	}
 	// private int puntosGanados;
 	// private ArrayList<Item> items = new ArrayList<Item>();
 
@@ -56,6 +87,14 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		estado = Estado.getEstadoOffline();
 	}
 
+	public int getAtravesarParedes() {
+		return atravesarParedes;
+	}
+
+	public void setAtravesarParedes(int atravesarParedes) {
+		this.atravesarParedes = atravesarParedes;
+	}
+	
 	public int getEstado() {
 		return estado;
 	}
@@ -160,6 +199,66 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 		this.inteligencia = inteligencia;
 	}
 
+	/**
+	 * Devuelve si esta en el estado invulnerable.
+	 */
+	public final int getInvulnerable() {
+		return this.invulnerable;
+	}
+	
+	/**
+	 * Setea el estado invulnerable.
+	 * @param invulnerable
+	 */
+	public final void setInvulnerable(int invulnerable) {
+		this.invulnerable = invulnerable;
+	}
+	
+	/**
+	 * Devuelve si esta en el estado de doble fuerte.
+	 */
+	public final int getDobleFuerza() {
+		return this.dobleFuerza;
+	}
+	
+	/**
+	 * Setea el estado de doble fuerte.
+	 * @param dobleFuerza
+	 */
+	public final void setDobleFuerza(int dobleFuerza) {
+		this.dobleFuerza = dobleFuerza;
+	}
+	
+	/**
+	 * Devuelve si esta en el estado de mitad de fuerza.
+	 */
+	public final int getMitadFuerza() {
+		return this.mitadFuerza;
+	}
+	
+	/**
+	 * Setea el estado mitad de fuerza.
+	 * @param mitadFuerza
+	 */
+	public final void setMitadFuerza(int mitadFuerza) {
+		this.mitadFuerza = mitadFuerza;
+	}
+	
+	/**
+	 * Devuelve si esta en el estado de invisibilidad.
+	 */
+	public final int getInvisible() {
+		return this.invisible;
+	}
+	
+	/**
+	 * Setea el estado de invisibilidad.
+	 * @param invisible
+	 */
+	public final void setInvisible(int invisible) {
+		this.invisible = invisible;
+	}
+	
 	@Override
 	public Object clone() {
 		Object obj = null;

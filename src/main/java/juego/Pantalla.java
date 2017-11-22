@@ -26,8 +26,7 @@ import chat.VentanaContactos;
 import cliente.Cliente;
 import estados.Estado;
 import frames.MenuAsignarSkills;
-import frames.MenuAsignarSkillsGodMode;
-import frames.MenuCheats;
+//import frames.MenuCheats;
 import frames.MenuEscape;
 import frames.MenuInventario;
 import frames.MenuJugar;
@@ -51,7 +50,7 @@ public class Pantalla {
 	/**
 	 * Constante para activar el menú de Cheats con la tecla T.
 	 */
-	private static int TECLA_T =84;
+	//private static int TECLA_T =84;
 	/**
 	 * Constante para activar el menú de Stats con la tecla S.
 	 */
@@ -66,10 +65,9 @@ public class Pantalla {
 	private static int TECLA_C =67;
 
 	// Menus
-	public static MenuCheats menuCheats;
+	//public static MenuCheats menuCheats;
 	public static MenuInventario menuInventario;
 	public static MenuAsignarSkills menuAsignar;
-	public static MenuAsignarSkillsGodMode menuAsignarGodMode;
 	public static MenuStats menuStats;
 	public static MenuEscape menuEscp;
 	public static VentanaContactos ventContac;
@@ -113,7 +111,7 @@ public class Pantalla {
 			{
 				put(TECLA_I, () -> mostrarInventario());
 				put(TECLA_A, () -> mostrarMenuAsignarSkills());
-				put(TECLA_T, () -> mostrarMenuCheats());
+				//put(TECLA_T, () -> mostrarMenuCheats());
 				put(TECLA_S, () -> mostrarMenuStats());
 				put(TECLA_ESC, () -> mostrarMenuEscape());
 				put(TECLA_C, () -> mostrarVentanaContactos());
@@ -177,16 +175,7 @@ public class Pantalla {
 			// }
 		}
 	}
-	
-	/*private void mostrarMenuAsignarSkillsGodMode() {
-		if (Estado.getEstado().esEstadoDeJuego() && menuAsignarGodMode == null) {
-			// if (menuAsignar == null) {
-			menuAsignarGodMode = new MenuAsignarSkillsGodMode(cliente);
-			menuAsignarGodMode.setVisible(true);
-			// }
-		}
-	}*/
-	
+	/*
 	private void mostrarMenuCheats() {
 		if (Estado.getEstado().esEstadoDeJuego() && menuCheats == null) {
 			// if (menuAsignar == null) {
@@ -194,7 +183,7 @@ public class Pantalla {
 			menuCheats.setVisible(true);
 			// }
 		}
-	}
+	}*/
 
 	private void mostrarMenuStats() {
 		if (Estado.getEstado().esEstadoDeJuego() && menuStats == null) {

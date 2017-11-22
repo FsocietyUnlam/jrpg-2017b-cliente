@@ -7,7 +7,7 @@ public class PaqueteBatalla extends Paquete implements Serializable, Cloneable {
 	private int id;
 	private int idEnemigo;
 	private boolean miTurno;
-
+	
 	public PaqueteBatalla() {
 		setComando(Comando.BATALLA);
 	}
