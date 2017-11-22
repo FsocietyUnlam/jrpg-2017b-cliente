@@ -136,6 +136,11 @@ public class MenuAsignarSkills extends JFrame {
 		puntosTotales[INDICEATRIBUTODESTREZA] = cliente.getPaquetePersonaje().getDestreza();
 		puntosTotales[INDICEATRIBUTOINTELIGENCIA] = cliente.getPaquetePersonaje().getInteligencia();
 
+		// OBTENGO LOS PUNTOS ASIGNADOS
+		puntosAsignadosInicialmente[INDICEATRIBUTOFUERZA] = cliente.getPaquetePersonaje().getPtosAsigFuerza();
+		puntosAsignadosInicialmente[INDICEATRIBUTODESTREZA] = cliente.getPaquetePersonaje().getPtosAsigDestreza();
+		puntosAsignadosInicialmente[INDICEATRIBUTOINTELIGENCIA] = cliente.getPaquetePersonaje().getPtosAsigInteligencia();
+		
 		// ACÁ SACO LOS PUNTOS BASE DE LOS ATRIBUTOS QUE CAMBIAN DEPENDIENDO DE LA CASTA.		
 		String unaCasta = cliente.getPaquetePersonaje().getCasta();
 		if (unaCasta.equals("Asesino")) {
@@ -182,8 +187,13 @@ public class MenuAsignarSkills extends JFrame {
 		int posicionlabelPunto = 43;
 		for (i = 0; i < CANTATRIBUTOS; i++) {
 			puntosBase[i] += PUNTAJEDEATRIBUTOINICIAL;
-			puntosLimiteMinimo[i] = puntosBase[i] + puntosBonus[i];
-			puntosAsignadosInicialmente[i] = puntosTotales[i] - puntosLimiteMinimo[i];
+			if ( i == INDICEATRIBUTOFUERZA) {
+				puntosLimiteMinimo[i] = puntosBase[i] + puntosBonus[i] + cliente.getPaquetePersonaje().getDobleFuerza() - cliente.getPaquetePersonaje().getMitadFuerza();
+			}else {
+				puntosLimiteMinimo[i] = puntosBase[i] + puntosBonus[i];	
+			}
+			
+			//puntosAsignadosInicialmente[i] = puntosTotales[i] - puntosLimiteMinimo[i];
 			labelPuntosAtributos[i] = new JLabel("");
 			buttonMinus[i] = new JButton("");
 			buttonMore[i] = new JButton("");
@@ -235,6 +245,9 @@ public class MenuAsignarSkills extends JFrame {
 				cliente.getPaquetePersonaje().useBonus(0, 0, puntosAsignados[INDICEATRIBUTOFUERZA], puntosAsignados[INDICEATRIBUTODESTREZA],
 						puntosAsignados[INDICEATRIBUTOINTELIGENCIA]);
 				cliente.getPaquetePersonaje().removerBonus();
+				cliente.getPaquetePersonaje().setPtosAsigFuerza(cliente.getPaquetePersonaje().getPtosAsigFuerza()+puntosAsignados[INDICEATRIBUTOFUERZA]);
+				cliente.getPaquetePersonaje().setPtosAsigDestreza(cliente.getPaquetePersonaje().getPtosAsigDestreza()+puntosAsignados[INDICEATRIBUTODESTREZA]);
+				cliente.getPaquetePersonaje().setPtosAsigInteligencia(cliente.getPaquetePersonaje().getPtosAsigInteligencia()+puntosAsignados[INDICEATRIBUTOINTELIGENCIA]);
 				cliente.getPaquetePersonaje().setComando(Comando.ACTUALIZARPERSONAJELV);
 				try {
 
@@ -287,6 +300,7 @@ public class MenuAsignarSkills extends JFrame {
 			// DESHABILITAR BOTONES DE MINUS CUANDO LA CANTIDAD DE PUNTOS QUE TIENEN ES
 			// IGUAL AL LÍMITE MÍNIMO
 			if (puntosTotales[i] == puntosLimiteMinimo[i]) {
+				//JOptionPane.showMessageDialog(null, i + " - ptosTot:" + puntosTotales[i] + " - ptos limMin:" + puntosLimiteMinimo[i]);
 				buttonMinus[i].setEnabled(false);
 			}
 			// DESHABILITAR BOTONES DE MORE CUANDO LA CANTIDAD DE PUNTOS QUE TIENEN ES IGUAL

@@ -59,6 +59,9 @@ public class EstadoBatalla extends Estado {
 
 		paquetePersonaje = juego.getPersonajesConectados().get(paqueteBatalla.getId());
 		paqueteEnemigo = juego.getPersonajesConectados().get(paqueteBatalla.getIdEnemigo());
+		
+		/*JOptionPane.showMessageDialog(null,"PaquetePersonaje:" + paquetePersonaje.getNombre() + " - inv:" + paquetePersonaje.getInvulnerable()
+		+ "\n\n PaqueteEnemigo:" + paqueteEnemigo.getNombre() + " - inv:" + paqueteEnemigo.getInvulnerable());*/
 
 		crearPersonajes();
 
@@ -196,25 +199,14 @@ public class EstadoBatalla extends Estado {
 
 	private void crearPersonajes() {
 		String nombre = paquetePersonaje.getNombre();
-		int salud, energia, fuerza, destreza, inteligencia;
 		int experiencia = paquetePersonaje.getExperiencia();
 		int nivel = paquetePersonaje.getNivel();
 		int id = paquetePersonaje.getId();
-		personaje.setGodMode(paquetePersonaje.getGodMode());
-		
-		if (paquetePersonaje.getGodMode()) {
-			salud = paquetePersonaje.getSaludTope();
-			energia = paquetePersonaje.getEnergiaTope();
-			fuerza = personaje.getTopeFuerza();
-			destreza = personaje.getTopeDestreza();
-			inteligencia = personaje.getTopeInteligencia();
-		} else {
-			salud = paquetePersonaje.getSaludTope();
-			energia = paquetePersonaje.getEnergiaTope();
-			fuerza = paquetePersonaje.getFuerza();
-			destreza = paquetePersonaje.getDestreza();
-			inteligencia = paquetePersonaje.getInteligencia();
-		}
+		int salud = paquetePersonaje.getSaludTope();
+		int energia = paquetePersonaje.getEnergiaTope();
+		int fuerza = paquetePersonaje.getFuerza();
+		int destreza = paquetePersonaje.getDestreza();
+		int inteligencia = paquetePersonaje.getInteligencia();
 
 		Casta casta = null;
 		try {
@@ -227,6 +219,14 @@ public class EstadoBatalla extends Estado {
 				| InvocationTargetException | NoSuchMethodException | SecurityException e) {
 			JOptionPane.showMessageDialog(null, "Error al crear la batalla");
 		}
+		personaje.setInvulnerable(paquetePersonaje.getInvulnerable());
+		
+		/*if(paquetePersonaje.getDobleFuerza()==1) {
+			personaje.aumentarFuerza(personaje.getFuerza());
+		}
+		if(paqueteEnemigo.getMitadFuerza()==1) {
+			personaje.aumentarFuerza(-(personaje.getFuerza()/2));
+		}*/
 
 		nombre = paqueteEnemigo.getNombre();
 		salud = paqueteEnemigo.getSaludTope();
@@ -254,6 +254,20 @@ public class EstadoBatalla extends Estado {
 		} else if (paqueteEnemigo.getRaza().equals("Elfo")) {
 			enemigo = new Elfo(nombre, salud, energia, fuerza, destreza, inteligencia, casta, experiencia, nivel, id);
 		}
+		enemigo.setInvulnerable(paqueteEnemigo.getInvulnerable());
+		
+		/*if(paqueteEnemigo.getDobleFuerza()==1) {
+			enemigo.aumentarFuerza(enemigo.getFuerza());
+		}
+		if(paqueteEnemigo.getMitadFuerza()==1) {
+			enemigo.aumentarFuerza(-(enemigo.getFuerza()/2));
+		}
+		JOptionPane.showMessageDialog(null,"PaquetePersonaje:" + paquetePersonaje.getNombre() + " - fuerza:" + paquetePersonaje.getFuerza()
+		+ "\n\n PaqueteEnemigo:" + paqueteEnemigo.getNombre() + " - fuerza:" + paqueteEnemigo.getFuerza());*/
+		if (paquetePersonaje.getInvulnerable() == 1 && paqueteEnemigo.getInvulnerable() ==1) {
+			personaje.setInvulnerable(0);
+			enemigo.setInvulnerable(0);
+		}
 	}
 
 	public void enviarAtaque(PaqueteAtacar paqueteAtacar) {
@@ -268,7 +282,6 @@ public class EstadoBatalla extends Estado {
 		try {
 			getJuego().getCliente().getSalida().writeObject(gson.toJson(paqueteFinalizarBatalla));
 
-			//Ver si a personaje y a enemigo se le modifican los atributos antes de finalizar batalla
 			paquetePersonaje.setSaludTope(personaje.getSaludTope());
 			paquetePersonaje.setEnergiaTope(personaje.getEnergiaTope());
 			paquetePersonaje.setNivel(personaje.getNivel());
@@ -288,9 +301,11 @@ public class EstadoBatalla extends Estado {
 			paqueteEnemigo.setInteligencia(enemigo.getInteligencia());
 			paqueteEnemigo.removerBonus();
 
+			/*JOptionPane.showMessageDialog(null,"Personaje" + paquetePersonaje.getNombre() + "=inv:" + paquetePersonaje.getInvulnerable() + "\n");
+			JOptionPane.showMessageDialog(null,"Enemigo" + paqueteEnemigo.getNombre() + "=inv:" +  paqueteEnemigo.getInvulnerable() + "\n");*/
 			paquetePersonaje.setComando(Comando.ACTUALIZARPERSONAJE);
 			paqueteEnemigo.setComando(Comando.ACTUALIZARPERSONAJE);
-
+			
 			getJuego().getCliente().getSalida().writeObject(gson.toJson(paquetePersonaje));
 			getJuego().getCliente().getSalida().writeObject(gson.toJson(paqueteEnemigo));
 
