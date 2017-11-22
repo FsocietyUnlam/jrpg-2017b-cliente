@@ -25,7 +25,8 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int inteligencia;
 	private int nivel = 1;
 	private int experiencia;
-	private int invulnerable;
+
+	/*private int invulnerable;
 	private int dobleFuerza;
 	private int mitadFuerza;
 	private int invisible;
@@ -44,7 +45,12 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	public int getPtosAsigDestreza() {
 		return ptosAsigDestreza;
-	}
+	}*/
+	
+	   /**
+     * The puntos skills disponibles.
+     */
+    private int puntosSkillsDisponibles;
 
 	public void setPtosAsigDestreza(int ptosAsigDestreza) {
 		this.ptosAsigDestreza = ptosAsigDestreza;
@@ -401,4 +407,15 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 			this.items.add(item);
 		}
 	}
+	
+    /**
+     * Actualizar puntos skills disponibles.
+     *
+     * @param puntosSkillsDisponiblesParam
+     *            the puntos skills disponibles
+     */
+    public void actualizarPuntosSkillsDisponibles(
+            final int puntosSkillsDisponiblesParam) {
+        this.puntosSkillsDisponibles += puntosSkillsDisponiblesParam;
+    }
 }

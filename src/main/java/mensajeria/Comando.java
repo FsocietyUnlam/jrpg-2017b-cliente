@@ -12,9 +12,10 @@ public abstract class Comando {
 	 * atributo estatico con el nombre del paquete.
 	 */
 	public static final String NOMBREPAQUETE = "comandos";
+
 	/**
 	 * atributo estatico con el nombre de las clases.
-	 */
+	 *//*
 	public static final String[] CLASSNAMES = {"Conexion", "CrearPersonaje", "Desconectar", "InicioSesion",
 			"MostrarMapas", "Movimiento", "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla",
 			"ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio",
@@ -22,10 +23,29 @@ public abstract class Comando {
 	/**
 	 * atributo estatico.
 	 */
-	public static final String[] CLASSNAMESBIS = {"Conexion", "CrearPersonaje", "Desconectar", "InicioSesionSet",
+	/*public static final String[] CLASSNAMESBIS = {"Conexion", "CrearPersonaje", "Desconectar", "InicioSesionSet",
 			"MostrarMapas", "Movimiento", "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla",
 			"ActualizarPersonaje", "ActualizarPersonajeLvl", "ActualizarInventario", "Comercio", "ActualizarComercio",
-			"Trueque", "ActualizarTrueque", "Talk" };
+			"Trueque", "ActualizarTrueque", "Talk" };*/
+
+    public static final String[] CLASSNAMES = {"Conexion", "CrearPersonaje",
+            "Desconectar", "InicioSesion", "MostrarMapas", "Movimiento",
+            "Registro", "Salir", "Batalla", "Atacar", "FinalizarBatalla",
+            "ActualizarPersonaje", "ActualizarPersonajeLvl",
+            "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque",
+            "ActualizarTrueque", "Talk", "ActualizarPuntosSkills",
+            "SetEnemigos", "FinalizarBatallaNPC", "BatallaNPC" };
+
+    /**
+     * The Constant CLASSNAMESBIS.
+     */
+    public static final String[] CLASSNAMESBIS = {"Conexion", "CrearPersonaje",
+            "Desconectar", "InicioSesionSet", "MostrarMapas", "Movimiento",
+            "RegistroSet", "SalirSet", "Batalla", "Atacar", "FinalizarBatalla",
+            "ActualizarPersonaje", "ActualizarPersonajeLvl",
+            "ActualizarInventario", "Comercio", "ActualizarComercio", "Trueque",
+            "ActualizarTrueque", "Talk", "ActualizarPuntosSkills",
+            "SetEnemigos", "FinalizarBatallaNPC", "BatallaNPC" };
 
 	/**
 	 * Atributo estático de conexion.
@@ -103,6 +123,10 @@ public abstract class Comando {
 	 * Atributo estático de TALK.
 	 */
 	public static final int TALK = 18;
+    public static final int ACTUALIZARPUNTOSSKILLS = 19;
+    public static final int SETENEMIGOS = 20;
+    public static final int FINALIZARBATALLANPC = 21;
+    public static final int BATALLANPC = 22;
 
 	/**
 	 * Atributo del tipo Gson.
@@ -119,6 +143,19 @@ public abstract class Comando {
 	public void setCadena(String cadenaLeida) {
 		this.cadenaLeida = cadenaLeida;
 	}
+	
+    /**
+     * @return the cadenaLeida
+     */
+    public String getCadenaLeida() {
+        return cadenaLeida;
+    }
+    /**
+     * @return the gson
+     */
+    public Gson getGson() {
+        return gson;
+    }
 
 	/**
 	 * Método abstracto.
