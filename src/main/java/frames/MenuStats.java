@@ -31,6 +31,7 @@ import mensajeria.PaquetePersonaje;
  */
 public class MenuStats extends JFrame {
 
+	private static final int BACKGROUND_SUPERIOR_BOUND = -12;
 	/**
 	 * El buen serial ID.
 	 */
@@ -245,7 +246,7 @@ public class MenuStats extends JFrame {
 		btnVolver.setBounds(128, 245, 97, 25);
 		contentPane.add(btnVolver);
 		JLabel background = new JLabel(new ImageIcon(imagenFondo.getScaledInstance(400, 350, Image.SCALE_DEFAULT)));
-		background.setBounds(-12, -11, 363, 312);
+		background.setBounds(BACKGROUND_SUPERIOR_BOUND, -11, 363, 312);
 		contentPane.add(background);
 	}
 	/**
