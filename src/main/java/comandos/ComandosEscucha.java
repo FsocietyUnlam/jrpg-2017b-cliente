@@ -10,7 +10,7 @@ public abstract class ComandosEscucha extends Comando {
     /**
      * juego.
      */
-    private Juego juego;
+    protected Juego juego;
     /**
      * Setter de juego.
      * @param juego envia el juego

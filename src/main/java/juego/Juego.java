@@ -15,9 +15,9 @@ import dominio.Personaje;
 import estados.Estado;
 import estados.EstadoBatalla;
 import estados.EstadoJuego;
+import mensajeria.PaqueteEnemigo;
 import mensajeria.PaqueteMovimiento;
 import mensajeria.PaquetePersonaje;
-import mensajeria.PaqueteBatalla;
 
 public class Juego implements Runnable {
 
@@ -41,6 +41,10 @@ public class Juego implements Runnable {
 	// Estados
 	private Estado estadoJuego;
 	private Estado estadoBatalla;
+    /**
+     * The estado batalla NPC.
+     */
+    private Estado estadoBatallaNPC;
 
 	// HandlerMouse
 	private HandlerMouse handlerMouse;
@@ -53,6 +57,17 @@ public class Juego implements Runnable {
 	private EscuchaMensajes escuchaMensajes;
 	private PaquetePersonaje paquetePersonaje;
 	private PaqueteMovimiento ubicacionPersonaje;
+	
+    /**
+     * The paquete enemigo.
+     */
+    private PaqueteEnemigo paqueteEnemigo;
+	
+    /**
+     * The enemigos.
+     */
+    private Map<Integer, PaqueteEnemigo> enemigos;
+    
 	private Map<Integer, PaquetePersonaje> personajesConectados;
 	private Map<Integer, PaqueteMovimiento> ubicacionPersonajes;
 	private Map<String, MiChat> chatsActivos = new HashMap<>();
@@ -278,4 +293,48 @@ public class Juego implements Runnable {
 	public Map<String, MiChat> getChatsActivos() {
 		return chatsActivos;
 	}
+	
+    /**
+     * Actualizar enemigo.
+     */
+    public void actualizarEnemigo() {
+        paqueteEnemigo = (PaqueteEnemigo) (enemigos.get(paqueteEnemigo.getId())
+                .clone());
+    }
+    /**
+     * Gets the enemigos.
+     *
+     * @return the enemigos
+     */
+    public Map<Integer, PaqueteEnemigo> getEnemigos() {
+        return enemigos;
+    }
+
+    /**
+     * Sets the enemigos.
+     *
+     * @param enemigosParam
+     *            the enemigos
+     */
+    public void setEnemigos(final Map<Integer, PaqueteEnemigo> enemigosParam) {
+        this.enemigos = enemigosParam;
+    }
+    /**
+     * Gets the estado batalla NPC.
+     *
+     * @return the estado batalla NPC
+     */
+    public Estado getEstadoBatallaNPC() {
+        return estadoBatallaNPC;
+    }
+    
+    /**
+     * Sets the estado batalla NPC.
+     *
+     * @param estadoBatallaNPCParam
+     *            the new estado batalla NPC
+     */
+    public void setEstadoBatallaNPC(final Estado estadoBatallaNPCParam) {
+        this.estadoBatallaNPC = estadoBatallaNPCParam;
+    }
 }
