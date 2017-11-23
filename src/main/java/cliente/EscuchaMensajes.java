@@ -70,7 +70,7 @@ public class EscuchaMensajes extends Thread {
 
                 paquete = gson.fromJson(objetoLeido, Paquete.class);
                 comand = (ComandosEscucha) paquete.getObjeto(Comando.NOMBREPAQUETE);
-                System.out.println(comand.getClass());
+                //System.out.println(comand.getClass());
                 comand.setJuego(juego);
                 comand.setCadena(objetoLeido);
                 comand.ejecutar();

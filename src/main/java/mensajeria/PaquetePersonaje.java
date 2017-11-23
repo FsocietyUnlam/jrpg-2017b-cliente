@@ -26,7 +26,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 	private int nivel = 1;
 	private int experiencia;
 
-	/*private int invulnerable;
+	private int invulnerable;
 	private int dobleFuerza;
 	private int mitadFuerza;
 	private int invisible;
@@ -45,7 +45,7 @@ public class PaquetePersonaje extends Paquete implements Serializable, Cloneable
 
 	public int getPtosAsigDestreza() {
 		return ptosAsigDestreza;
-	}*/
+	}
 	
 	   /**
      * The puntos skills disponibles.
